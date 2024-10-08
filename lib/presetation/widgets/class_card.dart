@@ -35,13 +35,13 @@ class ClassCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundImage: AssetImage(avatar), 
+                    backgroundImage: AssetImage(avatar),
                   ),
                 );
               }).toList(),
             ),
             SizedBox(height: 8),
-            EditButton(), 
+            EditButton(),
           ],
         ),
       ),

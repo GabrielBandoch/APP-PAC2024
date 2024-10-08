@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomProgressBar extends StatelessWidget {
-  final Animation<double> progress; // Recebe a animação como parâmetro
+  final Animation<double> progress; 
 
   CustomProgressBar({required this.progress});
 
@@ -18,7 +18,6 @@ class CustomProgressBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(6),
             ),
           ),
-
           Positioned(
             top: 2,
             left: 2,

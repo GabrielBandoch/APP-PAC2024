@@ -5,7 +5,8 @@ class StatusCard extends StatelessWidget {
   final String nome;
   final String data;
 
-  StatusCard({required this.statusColor, required this.nome, required this.data});
+  StatusCard(
+      {required this.statusColor, required this.nome, required this.data});
 
   @override
   Widget build(BuildContext context) {

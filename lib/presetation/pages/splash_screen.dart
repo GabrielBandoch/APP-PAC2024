@@ -1,13 +1,15 @@
+import 'dart:async'; // Import necessário para usar o Timer
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/widgets/custom_progress_bar.dart'; 
+import 'package:pac20242/presetation/widgets/custom_progress_bar.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _controller; 
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -15,12 +17,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5), 
-    )..repeat(reverse: false); 
-    _controller.addListener(() {
-      if (_controller.isCompleted) {
-        Navigator.pushReplacementNamed(context, '/home');
-      }
+      duration: Duration(seconds: 5),
+    )..repeat(reverse: false);
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.pushReplacementNamed(context, '/login');
     });
   }
 
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue, 
+      backgroundColor: Colors.blue,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,20 +43,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               fontSize: 48,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: 'ComicSans', // só dar um jeito de mudar essa fonte aq, mt trabalho
+              fontFamily: 'ComicSans', // Ajustar a fonte conforme necessário
             ),
           ),
-          
           SizedBox(height: 20),
-
           Image.asset(
             '../../../assets/images/bibi.png',
             width: 350,
             height: 350,
           ),
-
           SizedBox(height: 40),
-
           CustomProgressBar(progress: _controller),
         ],
       ),

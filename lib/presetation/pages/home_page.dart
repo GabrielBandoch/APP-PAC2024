@@ -17,7 +17,8 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Header(userName: userName, profileImageUrl: 'assets/images/profile.jpg'),
+          Header(
+              userName: userName, profileImageUrl: 'assets/images/profile.jpg'),
           NavigationIcons(),
           Expanded(child: StatusList()),
         ],

@@ -15,10 +15,10 @@ class GerenciarAlunoPage extends StatelessWidget {
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, 
-                  childAspectRatio: 0.7, 
+                  crossAxisCount: 3,
+                  childAspectRatio: 0.7,
                 ),
-                itemCount: 9, 
+                itemCount: 9,
                 itemBuilder: (context, index) {
                   return StudentCard(name: 'Gabriel Bandoch');
                 },

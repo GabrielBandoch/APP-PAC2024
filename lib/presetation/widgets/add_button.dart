@@ -8,13 +8,13 @@ class AddButton extends StatelessWidget {
         // script para adicioanr aluno
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue, 
+        backgroundColor: Colors.blue,
         padding: EdgeInsets.all(20),
-        shape: CircleBorder(), 
+        shape: CircleBorder(),
       ),
       child: Icon(
         Icons.add,
-        color: Colors.white, 
+        color: Colors.white,
         size: 30,
       ),
     );
