@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/pages/home_page.dart';
+import 'package:pac20242/presetation/pages/splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: SplashScreen(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PAC 2024',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(userName: 'Nome do Usuário'),
-    );
-  }
-}
