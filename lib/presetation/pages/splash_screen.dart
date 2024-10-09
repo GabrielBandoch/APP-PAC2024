@@ -1,4 +1,4 @@
-import 'dart:async'; // Import necessário para usar o Timer
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/custom_progress_bar.dart';
 
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen>
               fontSize: 48,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: 'ComicSans', // Ajustar a fonte conforme necessário
+              fontFamily: 'ComicSans',
             ),
           ),
           SizedBox(height: 20),
