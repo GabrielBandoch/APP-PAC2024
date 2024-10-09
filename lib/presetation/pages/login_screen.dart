@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
             top: -100,
             left: -100,
             child: CircleAvatar(
-              radius: 150,
+              radius: 180,
               backgroundColor: Color(0xFF1577EA),
             ),
           ),
@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             top: -50,
             right: -80,
             child: CircleAvatar(
-              radius: 120,
+              radius: 125,
               backgroundColor: Color(0xFF1577EA),
             ),
           ),
@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             top: 50,
             left: 150,
             child: CircleAvatar(
-              radius: 80,
+              radius:45,
               backgroundColor: Color(0xFF1577EA),
             ),
           ),
@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                       hintText: 'Usuário',
                       hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(50),
                         borderSide: BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                       hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
                       suffixIcon: Icon(Icons.visibility),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(50),
                         borderSide: BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
@@ -156,6 +156,7 @@ class LoginScreen extends StatelessWidget {
                         'Não tem uma conta?',
                         style: TextStyle(
                           color: Color(0xFF1577EA),
+                          fontSize: 20,
                           fontWeight: FontWeight.w800, // Extra Bold
                         ),
                       ),
