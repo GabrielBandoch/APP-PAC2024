@@ -1,33 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:pac20242/presetation/pages/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F5F5),
       body: Stack(
         children: [
           Positioned(
-            top: -100,
-            left: -100,
-            child: CircleAvatar(
-              radius: 180,
-              backgroundColor: Color(0xFF1577EA),
+            top: -54,
+            left: -38,
+            child: Container(
+              width: 258,
+              height: 220,
+              decoration: BoxDecoration(
+                color: Color(0xFF1577EA),
+                shape: BoxShape.circle,
+              ),
             ),
           ),
           Positioned(
-            top: -50,
-            right: -80,
-            child: CircleAvatar(
-              radius: 125,
-              backgroundColor: Color(0xFF1577EA),
+            top: -117,
+            right: 153,
+            child: Container(
+              width: 353,
+              height: 319,
+              decoration: BoxDecoration(
+                color: Color(0xFF1577EA),
+                shape: BoxShape.circle,
+              ),
             ),
           ),
           Positioned(
-            top: 50,
-            left: 150,
-            child: CircleAvatar(
-              radius:45,
-              backgroundColor: Color(0xFF1577EA),
+            top: 72,
+            left: -76,
+            child: Container(
+              width: 332,
+              height: 310,
+              decoration: BoxDecoration(
+                color: Color(0xFF1577EA),
+                shape: BoxShape.circle,
+              ),
             ),
           ),
           Center(
@@ -36,16 +50,37 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.grey[200],
+                  SizedBox(height: 80),
+                  Container(
+                    width: 177,
+                    height: 175,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                    ),
                     child: Icon(
                       Icons.person,
-                      size: 60,
+                      size: 100,
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: 30),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Usuário',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
                   TextField(
                     decoration: InputDecoration(
                       filled: true,
@@ -59,8 +94,8 @@ class LoginScreen extends StatelessWidget {
                           width: 2,
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
                         borderSide: BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
@@ -69,6 +104,18 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Senha',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
                   TextField(
                     obscureText: true,
                     decoration: InputDecoration(
@@ -84,8 +131,8 @@ class LoginScreen extends StatelessWidget {
                           width: 2,
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
                         borderSide: BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
@@ -100,13 +147,15 @@ class LoginScreen extends StatelessWidget {
                       'Esqueceu sua senha?',
                       style: TextStyle(
                         color: Colors.black54,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   SizedBox(height: 32),
                   SizedBox(
-                    width: double.infinity,
-                    height: 50,
+                    width: 287,
+                    height: 48,
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -120,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontFamily: 'OpenSans',
-                          fontWeight: FontWeight.w800, // Extra Bold
+                          fontWeight: FontWeight.w800,
                           color: Colors.white,
                         ),
                       ),
@@ -138,7 +187,10 @@ class LoginScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           'OU',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Expanded(
@@ -156,30 +208,43 @@ class LoginScreen extends StatelessWidget {
                         'Não tem uma conta?',
                         style: TextStyle(
                           color: Color(0xFF1577EA),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800, // Extra Bold
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xFF1577EA),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Text(
-                          'Crie sua conta',
-                          style: TextStyle(
-                            color: Color(0xFF1577EA),
-                            fontWeight: FontWeight.w800, // Extra Bold
-                          ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(height: 8),
+                  SizedBox(
+                    width: 287,
+                    height: 48,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterScreen()),
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Color(0xFFF5F5F5),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Color(0xFF1577EA),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        'Crie sua conta',
+                        style: TextStyle(
+                          color: Color(0xFF1577EA),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
