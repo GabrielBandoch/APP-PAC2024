@@ -9,39 +9,13 @@ class LoginScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            top: -54,
-            left: -38,
-            child: Container(
-              width: 258,
-              height: 220,
-              decoration: BoxDecoration(
-                color: Color(0xFF1577EA),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-          Positioned(
-            top: -117,
-            right: 153,
-            child: Container(
-              width: 353,
-              height: 319,
-              decoration: BoxDecoration(
-                color: Color(0xFF1577EA),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 72,
-            left: -76,
-            child: Container(
-              width: 332,
-              height: 310,
-              decoration: BoxDecoration(
-                color: Color(0xFF1577EA),
-                shape: BoxShape.circle,
-              ),
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              '../../../assets/images/decoration1.png', 
+              fit: BoxFit.cover,
+              height: 350, 
             ),
           ),
           Center(
@@ -50,7 +24,7 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 80),
+                  SizedBox(height: 100),
                   Container(
                     width: 177,
                     height: 175,

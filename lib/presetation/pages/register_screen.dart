@@ -4,130 +4,177 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: -100,
-            left: -100,
-            child: CircleAvatar(
-              radius: 150,
-              backgroundColor: Color(0xFF1577EA),
-            ),
-          ),
-          Positioned(
-            top: -50,
-            right: -80,
-            child: CircleAvatar(
-              radius: 120,
-              backgroundColor: Color(0xFF1577EA),
-            ),
-          ),
-          Positioned(
-            bottom: -80,
-            right: -100,
-            child: CircleAvatar(
-              radius: 120,
-              backgroundColor: Color(0xFF1577EA),
-            ),
-          ),
+      backgroundColor: Color(0xFFF5F5F5),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double screenHeight = constraints.maxHeight;
+          double screenWidth = constraints.maxWidth;
 
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Image.asset(
-                      '../../../assets/images/bibi.png', 
-                      height: 200,
-                    ),
-                  ),
-                  SizedBox(height: 40),
-
-                  // Campo de Email
-                  TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color(0xFFF5F5F5),
-                      hintText: 'email@email.com',
-                      hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xFF1577EA),
-                          width: 2,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xFF1577EA),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-
-                  // Campo de Senha
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color(0xFFF5F5F5),
-                      hintText: 'Senha',
-                      hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
-                      suffixIcon: Icon(Icons.visibility),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xFF1577EA),
-                          width: 2,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xFF1577EA),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 32),
-
-                  // Botão de Registro
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Ação de registrar
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF1577EA),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text(
-                        'Registrar',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'OpenSans',
-                          fontWeight: FontWeight.w800, // Extra Bold
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+          return Stack(
+            children: [
+              Positioned(
+                top: screenHeight * -0.3,
+                left: screenWidth * -0.2,
+                child: Image.asset(
+                  '../../../assets/images/decoration2.png',
+                  width: screenWidth * 1.5,
+                  height: screenHeight * 0.95,
+                ),
               ),
-            ),
-          ),
-        ],
+
+              Positioned(
+                bottom: -50,
+                left: -50,
+                child: Container(
+                  width: screenWidth * 0.58,
+                  height: screenWidth * 0.58,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF1577EA),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: -50,
+                right: -screenWidth * 0.1,
+                child: Container(
+                  width: screenWidth * 0.42,
+                  height: screenWidth * 0.42,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF1577EA),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(height: screenHeight * 0.08),
+                      Image.asset(
+                        '../../../assets/images/bibi.png',
+                        height: screenHeight * 0.25,
+                      ),
+                      SizedBox(height: screenHeight * 0.05),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFFF5F5F5),
+                          hintText: 'email@email.com',
+                          hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            borderSide: BorderSide(
+                              color: Color(0xFF1577EA),
+                              width: 2,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            borderSide: BorderSide(
+                              color: Color(0xFF1577EA),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Senha',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFFF5F5F5),
+                          hintText: 'Senha',
+                          hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                          suffixIcon: Icon(Icons.visibility),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            borderSide: BorderSide(
+                              color: Color(0xFF1577EA),
+                              width: 2,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            borderSide: BorderSide(
+                              color: Color(0xFF1577EA),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.08),
+                      SizedBox(
+                        width: screenWidth * 0.75,
+                        height: screenHeight * 0.06,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/complete_profile');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1577EA),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            'Registrar',
+                            style: TextStyle(
+                              fontSize: screenWidth * 0.05,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.05),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Voltar',
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.045,
+                            color: Color(0xFF1577EA),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
