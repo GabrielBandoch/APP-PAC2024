@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/pages/teste.dart';
 
 class NavigationBarComplete extends StatelessWidget {
   final int selectedIndex;

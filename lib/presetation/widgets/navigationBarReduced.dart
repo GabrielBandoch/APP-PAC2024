@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/pages/teste.dart';
 
 class NavigationBarReduced extends StatelessWidget {
   final int selectedIndex;
@@ -12,18 +11,18 @@ class NavigationBarReduced extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: selectedIndex,
       onTap: (index) {
+        onTap(index); 
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/pagamento');
             break;
           case 1:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/conta');
             break;
           case 2:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/home');
             break;
         }
-        onTap(index);
       },
       items: [
         BottomNavigationBarItem(
@@ -31,8 +30,9 @@ class NavigationBarReduced extends StatelessWidget {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: _buildIcon(Icons.menu, 1),
+          icon: _buildIcon(Icons.home, 1),
           label: '',
+          
         ),
         BottomNavigationBarItem(
           icon: _buildIcon(Icons.settings, 2),

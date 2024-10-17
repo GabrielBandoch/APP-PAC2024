@@ -56,13 +56,9 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         return;
       }
     }
-
-    // Ação do botão ENVIAR (enviar os dados ou seguir para outra tela)
     setState(() {
       errorMessage = '';
     });
-
-    // Aqui você pode adicionar a lógica para processar os dados enviados
   }
 
   @override
@@ -241,7 +237,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     errorMessage,
                     style: TextStyle(color: Colors.red),
                   )
-                : Container(), // Retorna um Container vazio se não houver mensagem de erro
+                : Container(),
             ),
             Center(
               child: SizedBox(

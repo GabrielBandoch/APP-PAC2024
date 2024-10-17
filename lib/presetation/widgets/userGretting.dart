@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class UserGreeting extends StatelessWidget {
   final String userName;
   final String avatarUrl;
+  final VoidCallback onAvatarTap;
 
-  UserGreeting({required this.userName, required this.avatarUrl});
+  UserGreeting({required this.userName, required this.avatarUrl, required this.onAvatarTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 380,
+      width: 340,
       height: 64,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -24,9 +25,12 @@ class UserGreeting extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(avatarUrl),
-              radius: 24,
+            child: GestureDetector(
+              onTap: onAvatarTap, 
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(avatarUrl),
+                radius: 24,
+              ),
             ),
           ),
           Text(

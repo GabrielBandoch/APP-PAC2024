@@ -4,7 +4,8 @@ import 'package:pac20242/presetation/pages/login_screen.dart';
 import 'package:pac20242/presetation/pages/register_screen.dart';
 import 'package:pac20242/presetation/pages/completeProfile_screen.dart';
 import 'package:pac20242/presetation/pages/selectRole_screen.dart';
-import 'package:pac20242/presetation/pages/teste.dart';
+import 'package:pac20242/presetation/pages/Driver/homed_screen.dart';
+import 'package:pac20242/presetation/pages/Responsible/homer_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,7 +16,8 @@ void main() {
       '/register': (context) => RegisterScreen(),
       '/complete_profile': (context) => CompleteProfileScreen(),
       '/select_role': (context) => SelectRoleScreen(),
-      '/teste': (context) => TestePage(),
+      '/home_driver': (context) => HomeScreenDriver(),
+      '/home_resp': (context) => HomeScreenResponsavel(),
     },
   ));
 }
