@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/pages/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       body: Stack(
         children: [
           Positioned(
@@ -13,7 +15,7 @@ class LoginScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              '../../../assets/images/decoration1.png', 
+              'assets/images/Decoration1.png', 
               fit: BoxFit.cover,
               height: 350, 
             ),
@@ -24,7 +26,7 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 100),
+                  const SizedBox(height: 100),
                   Container(
                     width: 177,
                     height: 175,
@@ -36,14 +38,14 @@ class LoginScreen extends StatelessWidget {
                         width: 2,
                       ),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.person,
                       size: 100,
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Align(
+                  const SizedBox(height: 30),
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Usuário',
@@ -54,31 +56,31 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   TextField(
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xFFF5F5F5),
+                      fillColor: const Color(0xFFF5F5F5),
                       hintText: 'Usuário',
-                      hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                      hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Align(
+                  const SizedBox(height: 16),
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Senha',
@@ -89,33 +91,33 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   TextField(
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xFFF5F5F5),
+                      fillColor: const Color(0xFFF5F5F5),
                       hintText: 'Senha',
-                      hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
-                      suffixIcon: Icon(Icons.visibility),
+                      hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                      suffixIcon: const Icon(Icons.visibility),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFF1577EA),
                           width: 2,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Align(
+                  const SizedBox(height: 16),
+                  const Align(
                     alignment: Alignment.centerRight,
                     child: Text(
                       'Esqueceu sua senha?',
@@ -126,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   SizedBox(
                     width: 287,
                     height: 48,
@@ -135,12 +137,12 @@ class LoginScreen extends StatelessWidget {
                         Navigator.pushNamed(context, '/home_resp');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF1577EA),
+                        backgroundColor: const Color(0xFF1577EA),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Login',
                         style: TextStyle(
                           fontSize: 20,
@@ -151,8 +153,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 32),
-                  Row(
+                  const SizedBox(height: 32),
+                  const Row(
                     children: [
                       Expanded(
                         child: Divider(
@@ -160,7 +162,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           'OU',
                           style: TextStyle(
@@ -176,8 +178,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Row(
+                  const SizedBox(height: 16),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -190,7 +192,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   SizedBox(
                     width: 287,
                     height: 48,
@@ -203,16 +205,16 @@ class LoginScreen extends StatelessWidget {
                         );
                       },
                       style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFFF5F5F5),
+                        backgroundColor: const Color(0xFFF5F5F5),
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: Color(0xFF1577EA),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Crie sua conta',
                         style: TextStyle(
                           color: Color(0xFF1577EA),

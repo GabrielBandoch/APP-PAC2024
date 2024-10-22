@@ -6,7 +6,7 @@ class StatusCard extends StatelessWidget {
   final String status;
   final String date;
 
-  StatusCard({
+  const StatusCard({super.key, 
     required this.userName,
     required this.avatarUrl,
     required this.status,
@@ -18,20 +18,20 @@ class StatusCard extends StatelessWidget {
     Color color;
     switch (status) {
       case 'Pendente':
-        color = Color(0xFFC1C329);
+        color = const Color(0xFFC1C329);
         break;
       case 'Pago':
-        color = Color(0xFF0EB540);
+        color = const Color(0xFF0EB540);
         break;
       case 'Atrasado':
-        color = Color(0xFFB91C0E);
+        color = const Color(0xFFB91C0E);
         break;
       default:
         color = Colors.grey;
     }
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(12),
@@ -47,10 +47,10 @@ class StatusCard extends StatelessWidget {
                   backgroundImage: NetworkImage(avatarUrl),
                   radius: 20,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
                   userName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -63,16 +63,16 @@ class StatusCard extends StatelessWidget {
               children: [
                 Text(
                   status,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(
                   date,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

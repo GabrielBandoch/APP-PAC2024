@@ -5,7 +5,7 @@ class UserGreeting extends StatelessWidget {
   final String avatarUrl;
   final VoidCallback onAvatarTap;
 
-  UserGreeting({required this.userName, required this.avatarUrl, required this.onAvatarTap});
+  const UserGreeting({super.key, required this.userName, required this.avatarUrl, required this.onAvatarTap});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class UserGreeting extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Color(0xFF1577EA),
+          color: const Color(0xFF1577EA),
           width: 2,
         ),
         color: Colors.white,
@@ -35,14 +35,14 @@ class UserGreeting extends StatelessWidget {
           ),
           Text(
             'Olá, $userName',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Icon(
               Icons.notifications,
               color: Colors.black,

@@ -4,6 +4,8 @@ import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 
 class NotificationsScreen extends StatefulWidget {
+  const NotificationsScreen({super.key});
+
   @override
   _NotificationsScreen createState() => _NotificationsScreen();
 }
@@ -34,7 +36,7 @@ class _NotificationsScreen extends State<NotificationsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 55),
+              const SizedBox(height: 55),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: UserGreeting(
@@ -43,8 +45,8 @@ class _NotificationsScreen extends State<NotificationsScreen> {
                   onAvatarTap: toggleSideMenu,
                 ),
               ),
-              SizedBox(height: 30),
-              Center(  // Centraliza o texto de "Notificações"
+              const SizedBox(height: 30),
+              const Center(  // Centraliza o texto de "Notificações"
                 child: Text(
                   'Notificações',
                   style: TextStyle(
@@ -54,8 +56,8 @@ class _NotificationsScreen extends State<NotificationsScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
-              Expanded(
+              const SizedBox(height: 30),
+              const Expanded(
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +91,7 @@ class _NotificationsScreen extends State<NotificationsScreen> {
               ),
             ),
           AnimatedPositioned(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             left: isSideMenuOpen ? 0 : -250,
             top: 0,
             bottom: 0,

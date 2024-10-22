@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       body: LayoutBuilder(
         builder: (context, constraints) {
           double screenHeight = constraints.maxHeight;
@@ -16,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
                 top: screenHeight * -0.3,
                 left: screenWidth * -0.2,
                 child: Image.asset(
-                  '../../../assets/images/decoration2.png',
+                  'assets/images/Decoration2.png',
                   width: screenWidth * 1.5,
                   height: screenHeight * 0.95,
                 ),
@@ -28,7 +30,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Container(
                   width: screenWidth * 0.58,
                   height: screenWidth * 0.58,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFF1577EA),
                     shape: BoxShape.circle,
                   ),
@@ -40,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Container(
                   width: screenWidth * 0.42,
                   height: screenWidth * 0.42,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFF1577EA),
                     shape: BoxShape.circle,
                   ),
@@ -59,7 +61,7 @@ class RegisterScreen extends StatelessWidget {
                         height: screenHeight * 0.25,
                       ),
                       SizedBox(height: screenHeight * 0.05),
-                      Align(
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Email',
@@ -70,31 +72,31 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       TextField(
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color(0xFFF5F5F5),
+                          fillColor: const Color(0xFFF5F5F5),
                           hintText: 'email@email.com',
-                          hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                          hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF1577EA),
                               width: 2,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF1577EA),
                               width: 2,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      Align(
+                      const SizedBox(height: 16),
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Senha',
@@ -105,25 +107,25 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       TextField(
                         obscureText: true,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color(0xFFF5F5F5),
+                          fillColor: const Color(0xFFF5F5F5),
                           hintText: 'Senha',
-                          hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
-                          suffixIcon: Icon(Icons.visibility),
+                          hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                          suffixIcon: const Icon(Icons.visibility),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF1577EA),
                               width: 2,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xFF1577EA),
                               width: 2,
                             ),
@@ -139,7 +141,7 @@ class RegisterScreen extends StatelessWidget {
                             Navigator.pushNamed(context, '/complete_profile');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1577EA),
+                            backgroundColor: const Color(0xFF1577EA),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -163,7 +165,7 @@ class RegisterScreen extends StatelessWidget {
                           'Voltar',
                           style: TextStyle(
                             fontSize: screenWidth * 0.045,
-                            color: Color(0xFF1577EA),
+                            color: const Color(0xFF1577EA),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

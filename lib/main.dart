@@ -8,7 +8,6 @@ import 'package:pac20242/presetation/pages/selectRole_screen.dart';
 import 'package:pac20242/presetation/pages/Driver/homed_screen.dart';
 import 'package:pac20242/presetation/pages/Responsible/homer_screen.dart';
 import 'package:pac20242/presetation/pages/payment_screen.dart';
-import 'package:pac20242/presetation/pages/notifications_screen.dart';
 
 void main() {
   runApp(MaterialApp(

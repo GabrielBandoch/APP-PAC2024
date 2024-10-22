@@ -4,7 +4,7 @@ class NavigationBarComplete extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onTap;
 
-  NavigationBarComplete({required this.selectedIndex, required this.onTap});
+  const NavigationBarComplete({super.key, required this.selectedIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class NavigationBarComplete extends StatelessWidget {
         ),
       ],
       selectedItemColor: Colors.white,
-      unselectedItemColor: Color(0xFF515759),
+      unselectedItemColor: const Color(0xFF515759),
       showSelectedLabels: false,
       showUnselectedLabels: false,
       backgroundColor: Colors.white,
@@ -65,14 +65,14 @@ class NavigationBarComplete extends StatelessWidget {
   Widget _buildIcon(IconData icon, int index) {
     bool isSelected = selectedIndex == index;
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: isSelected ? Color(0xFF1577EA) : Colors.transparent,
+        color: isSelected ? const Color(0xFF1577EA) : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Icon(
         icon,
-        color: isSelected ? Colors.white : Color(0xFF515759),
+        color: isSelected ? Colors.white : const Color(0xFF515759),
       ),
     );
   }

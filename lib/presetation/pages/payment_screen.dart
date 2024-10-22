@@ -7,6 +7,8 @@ import 'package:pac20242/presetation/widgets/sideMenu.dart';
 import 'package:pac20242/presetation/widgets/statusCard.dart';
 
 class PaymentScreen extends StatefulWidget {
+  const PaymentScreen({super.key});
+
   @override
   _PaymentScreen createState() => _PaymentScreen();
 }
@@ -37,18 +39,18 @@ class _PaymentScreen extends State<PaymentScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 55), 
+              const SizedBox(height: 55), 
               UserGreeting(
                 userName: userName,
                 avatarUrl: avatarUrl,
                 onAvatarTap: toggleSideMenu,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       StatusCard(
                         userName: "Gabriel",
                         avatarUrl: "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
@@ -67,7 +69,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                         status: "Atrasado",
                         date: "03/01/2024",
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -84,7 +86,7 @@ class _PaymentScreen extends State<PaymentScreen> {
               ),
             ),
           AnimatedPositioned(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             left: isSideMenuOpen ? 0 : -250,
             top: 0,
             bottom: 0,
@@ -107,7 +109,7 @@ class _PaymentScreen extends State<PaymentScreen> {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Color(0xFF1577EA), width: 2),
+            border: Border.all(color: const Color(0xFF1577EA), width: 2),
             borderRadius: BorderRadius.circular(30),
           ),
           child: CircleAvatar(
@@ -120,10 +122,10 @@ class _PaymentScreen extends State<PaymentScreen> {
             ),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.black,

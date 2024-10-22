@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SelectRoleScreen extends StatefulWidget {
+  const SelectRoleScreen({super.key});
+
   @override
   _SelectRoleScreenState createState() => _SelectRoleScreenState();
 }
@@ -70,8 +72,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'Selecione',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -79,7 +81,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 fontSize: 22,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -88,11 +90,11 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     onPressed: selectCondutor,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isCondutorSelected ? Colors.blue : Colors.white,
-                      side: BorderSide(color: Colors.blue),
+                      side: const BorderSide(color: Colors.blue),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                     ),
                     child: Text(
                       'Condutor',
@@ -104,17 +106,17 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: selectAluno,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isAlunoSelected ? Colors.blue : Colors.white,
-                      side: BorderSide(color: Colors.blue),
+                      side: const BorderSide(color: Colors.blue),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                     ),
                     child: Text(
                       'Aluno',
@@ -128,51 +130,51 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             if (isCondutorSelected) ...[
               TextField(
                 controller: condutorNameController,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color(0xFFF5F5F5),
+                  fillColor: const Color(0xFFF5F5F5),
                   labelText: 'Nome Completo do Condutor',
                   hintText: 'Digite o nome completo do condutor',
-                  hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: condutorPhoneController,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color(0xFFF5F5F5),
+                  fillColor: const Color(0xFFF5F5F5),
                   labelText: 'Telefone',
                   hintText: 'Digite o telefone do condutor',
-                  hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
@@ -184,45 +186,45 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 controller: alunoNameController,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color(0xFFF5F5F5),
+                  fillColor: const Color(0xFFF5F5F5),
                   labelText: 'Nome Completo do Aluno',
                   hintText: 'Digite o nome completo do aluno',
-                  hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: alunoPhoneController,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color(0xFFF5F5F5),
+                  fillColor: const Color(0xFFF5F5F5),
                   labelText: 'Telefone',
                   hintText: 'Digite o telefone do aluno',
-                  hintStyle: TextStyle(color: Color(0xFFBCBCBC)),
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1577EA),
                       width: 2,
                     ),
@@ -230,12 +232,12 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 ),
               ),
             ],
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Center(
               child: errorMessage.isNotEmpty 
                 ? Text(
                     errorMessage,
-                    style: TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red),
                   )
                 : Container(),
             ),
@@ -245,13 +247,13 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 child: ElevatedButton(
                   onPressed: submit,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF1577EA),
+                    backgroundColor: const Color(0xFF1577EA),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     'ENVIAR',
                     style: TextStyle(
                       color: Colors.white,

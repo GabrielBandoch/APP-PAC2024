@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomProgressBar extends StatelessWidget {
   final Animation<double> progress; 
 
-  CustomProgressBar({required this.progress});
+  const CustomProgressBar({super.key, required this.progress});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CustomProgressBar extends StatelessWidget {
                 return LinearProgressIndicator(
                   value: progress.value,
                   backgroundColor: Colors.transparent,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.blueAccent),
                   minHeight: 8,
                 );
               },

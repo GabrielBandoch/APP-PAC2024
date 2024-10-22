@@ -4,7 +4,7 @@ class SideMenu extends StatelessWidget {
   final String userName;
   final String avatarUrl;
 
-  SideMenu({required this.userName, required this.avatarUrl});
+  const SideMenu({super.key, required this.userName, required this.avatarUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class SideMenu extends StatelessWidget {
                   backgroundImage: NetworkImage(avatarUrl),
                   radius: 40,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Olá, $userName',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -35,42 +35,42 @@ class SideMenu extends StatelessWidget {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
-                  leading: Icon(Icons.home, color: Color(0xFF0056B3)), 
-                  title: Text('Início', style: TextStyle(color: Colors.black)),
+                  leading: const Icon(Icons.home, color: Color(0xFF0056B3)), 
+                  title: const Text('Início', style: TextStyle(color: Colors.black)),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.notifications, color: Color(0xFF0056B3)), 
-                  title: Text('Notificações', style: TextStyle(color: Colors.black)),
+                  leading: const Icon(Icons.notifications, color: Color(0xFF0056B3)), 
+                  title: const Text('Notificações', style: TextStyle(color: Colors.black)),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.account_circle, color: Color(0xFF0056B3)), 
-                  title: Text('Minha Conta', style: TextStyle(color: Colors.black)),
+                  leading: const Icon(Icons.account_circle, color: Color(0xFF0056B3)), 
+                  title: const Text('Minha Conta', style: TextStyle(color: Colors.black)),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.attach_money, color: Color(0xFF0056B3)),
-                  title: Text('Pagamentos', style: TextStyle(color: Colors.black)),
+                  leading: const Icon(Icons.attach_money, color: Color(0xFF0056B3)),
+                  title: const Text('Pagamentos', style: TextStyle(color: Colors.black)),
                   onTap: () {
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.exit_to_app, color: Color(0xFF0056B3)),
-                  title: Text('Sair', style: TextStyle(color: Colors.black)),
+                  leading: const Icon(Icons.exit_to_app, color: Color(0xFF0056B3)),
+                  title: const Text('Sair', style: TextStyle(color: Colors.black)),
                   onTap: () {
                     Navigator.pop(context);
                   },

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CompleteProfileScreen extends StatelessWidget {
+  const CompleteProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class CompleteProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: screenHeight * 0.05), 
-                      Text(
+                      const Text(
                         'VAMOS COMPLETAR',
                         style: TextStyle(
                           fontSize: 35,
@@ -37,8 +39,8 @@ class CompleteProfileScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         'SEU PERFIL',
                         style: TextStyle(
                           fontSize: 35,
@@ -47,7 +49,7 @@ class CompleteProfileScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       SizedBox(
                         width: screenWidth * 0.5,
                         height: screenHeight * 0.06,
@@ -56,12 +58,12 @@ class CompleteProfileScreen extends StatelessWidget {
                             Navigator.pushNamed(context, '/select_role');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1577EA),
+                            backgroundColor: const Color(0xFF1577EA),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'VAMOS',
                             style: TextStyle(
                               fontSize: 25,

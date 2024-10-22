@@ -17,3 +17,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/bibi.png
+    - assets/images/Decoration1.png
+    - assets/images/Decoration2.png
+    - assets/images/Decoration3.png
+    - assets/images/Decoration4.png
+  fonts:
+    - family: ProtestRiot
+      fonts:
+        - asset: assets/fonts/ProtestRiot-Regular.ttf

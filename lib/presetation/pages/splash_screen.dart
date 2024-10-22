@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/custom_progress_bar.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -17,9 +19,9 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
     )..repeat(reverse: false);
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacementNamed(context, '/login');
     });
   }
@@ -37,22 +39,22 @@ class _SplashScreenState extends State<SplashScreen>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'BiBi',
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: 'ComicSans',
+              fontFamily: 'ProtestRiot',
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Image.asset(
-            '../../../assets/images/bibi.png',
+            'assets/images/bibi.png',
             width: 350,
             height: 350,
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           CustomProgressBar(progress: _controller),
         ],
       ),

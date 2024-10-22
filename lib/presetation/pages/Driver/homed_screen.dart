@@ -4,6 +4,8 @@ import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 
 class HomeScreenDriver extends StatefulWidget {
+  const HomeScreenDriver({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -35,13 +37,13 @@ class _HomeScreenState extends State<HomeScreenDriver> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 55), 
+              const SizedBox(height: 55), 
               UserGreeting(
                 userName: userName,
                 avatarUrl: avatarUrl,
                 onAvatarTap: toggleSideMenu,
               ),
-              SizedBox(height: 30), 
+              const SizedBox(height: 30), 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -51,22 +53,22 @@ class _HomeScreenState extends State<HomeScreenDriver> {
                   buildIconButton('Corrida', Icons.location_on),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(bottom: 35),
+                margin: const EdgeInsets.only(bottom: 35),
                 child: SizedBox(
                   width: 320,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF1577EA),
+                      backgroundColor: const Color(0xFF1577EA),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Iniciar Corrida',
                       style: TextStyle(
                         fontSize: 18,
@@ -89,7 +91,7 @@ class _HomeScreenState extends State<HomeScreenDriver> {
               ),
             ),
           AnimatedPositioned(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             left: isSideMenuOpen ? 0 : -250,
             top: 0,
             bottom: 0,
@@ -112,7 +114,7 @@ class _HomeScreenState extends State<HomeScreenDriver> {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Color(0xFF1577EA), width: 2),
+            border: Border.all(color: const Color(0xFF1577EA), width: 2),
             borderRadius: BorderRadius.circular(30),
           ),
           child: CircleAvatar(
@@ -125,10 +127,10 @@ class _HomeScreenState extends State<HomeScreenDriver> {
             ),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Colors.black,
