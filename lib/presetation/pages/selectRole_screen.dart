@@ -61,6 +61,12 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     setState(() {
       errorMessage = '';
     });
+    
+    if (isCondutorSelected) {
+      Navigator.pushNamed(context, '/home_driver');
+    } else {
+      Navigator.pushNamed(context, '/home_resp');
+    }
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/pages/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -198,11 +197,7 @@ class LoginScreen extends StatelessWidget {
                     height: 48,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterScreen()),
-                        );
+                            Navigator.pushNamed(context, '/register');
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: const Color(0xFFF5F5F5),
