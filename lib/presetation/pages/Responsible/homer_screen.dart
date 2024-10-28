@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
   int _selectedIndex = 2;
   bool isSideMenuOpen = false;
   final String userName = "Gabriel";
-  final String avatarUrl = ""; 
+  final String avatarUrl = "";
 
   void _onItemTapped(int index) {
     setState(() {
@@ -37,19 +37,37 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 55), 
+              const SizedBox(height: 55),
               UserGreeting(
                 userName: userName,
                 avatarUrl: avatarUrl,
                 onAvatarTap: toggleSideMenu,
               ),
-              const SizedBox(height: 30), 
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton('Pagamentos', Icons.attach_money),
-                  buildIconButton('Recibos', Icons.receipt_long),
-                  buildIconButton('Corrida', Icons.location_on),
+                  buildIconButton(
+                    'Pagamentos',
+                    Icons.attach_money,
+                    () {
+                      Navigator.pushNamed(context, '/payment');
+                    },
+                  ),
+                  buildIconButton(
+                    'Recibos',
+                    Icons.receipt_long,
+                    () {
+                      Navigator.pushNamed(context, '/receipts');
+                    },
+                  ),
+                  buildIconButton(
+                    'Corrida',
+                    Icons.location_on,
+                    () {
+                      Navigator.pushNamed(context, '/corrida');
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 30),
@@ -111,21 +129,24 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
     );
   }
 
-  Widget buildIconButton(String label, IconData icon) {
+  Widget buildIconButton(String label, IconData icon, VoidCallback onTap) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFF1577EA), width: 2),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.white,
-            child: Icon(
-              icon,
-              size: 30,
-              color: Colors.black,
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: const Color(0xFF1577EA), width: 2),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.white,
+              child: Icon(
+                icon,
+                size: 30,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

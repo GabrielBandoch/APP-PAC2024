@@ -13,19 +13,19 @@ class NavigationBarComplete extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/payment');
             break;
           case 1:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/home_driver');
             break;
           case 2:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/home_driver');
             break;
           case 3:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/home_driver');
             break;
           case 4:
-            Navigator.pushNamed(context, '/teste');
+            Navigator.pushNamed(context, '/home_driver');
             break;
         }
         onTap(index);

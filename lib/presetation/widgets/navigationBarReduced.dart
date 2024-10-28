@@ -14,10 +14,10 @@ class NavigationBarReduced extends StatelessWidget {
         onTap(index); 
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, '/pagamento');
+            Navigator.pushNamed(context, '/payment');
             break;
           case 1:
-            Navigator.pushNamed(context, '/conta');
+            Navigator.pushNamed(context, '/home_resp');
             break;
           case 2:
             Navigator.pushNamed(context, '/home');
