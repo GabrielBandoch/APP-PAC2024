@@ -23,7 +23,6 @@ class RegisterScreen extends StatelessWidget {
                   height: screenHeight * 0.95,
                 ),
               ),
-
               Positioned(
                 bottom: -50,
                 left: -50,
@@ -48,7 +47,6 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -132,13 +130,13 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: screenHeight * 0.08),
+                      const SizedBox(height: 32),
                       SizedBox(
-                        width: screenWidth * 0.75,
-                        height: screenHeight * 0.06,
+                        width: 287,
+                        height: 48,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/complete_profile');
+                            Navigator.pushNamed(context, '/complete');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1577EA),
@@ -146,11 +144,12 @@ class RegisterScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Registrar',
                             style: TextStyle(
-                              fontSize: screenWidth * 0.05,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: 'OpenSans',
+                              fontWeight: FontWeight.w800,
                               color: Colors.white,
                             ),
                           ),

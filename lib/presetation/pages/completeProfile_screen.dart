@@ -17,7 +17,7 @@ class CompleteProfileScreen extends StatelessWidget {
                 right: -screenWidth * 0,
                 top: -screenHeight * 0.1,
                 child: Image.asset(
-                  'assets/images/decoration3.png',
+                  'assets/images/Decoration3.png',
                   width: 400,
                   height: 300,
                 ),
@@ -81,7 +81,7 @@ class CompleteProfileScreen extends StatelessWidget {
                 bottom: -100,
                 right: -screenWidth * 0,
                 child: Image.asset(
-                  'assets/images/decoration4.png',
+                  'assets/images/Decoration4.png',
                   width: 400,
                   height: 350,
                 ),

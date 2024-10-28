@@ -4,23 +4,24 @@ class NavigationBarReduced extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onTap;
 
-  const NavigationBarReduced({super.key, required this.selectedIndex, required this.onTap});
+  const NavigationBarReduced(
+      {super.key, required this.selectedIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: selectedIndex,
       onTap: (index) {
-        onTap(index); 
+        onTap(index);
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, '/pagamento');
+            Navigator.pushNamed(context, '/payment');
             break;
           case 1:
-            Navigator.pushNamed(context, '/conta');
+            Navigator.pushNamed(context, '/home_resp');
             break;
           case 2:
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushNamed(context, '/home_resp');
             break;
         }
       },
@@ -32,7 +33,6 @@ class NavigationBarReduced extends StatelessWidget {
         BottomNavigationBarItem(
           icon: _buildIcon(Icons.home, 1),
           label: '',
-          
         ),
         BottomNavigationBarItem(
           icon: _buildIcon(Icons.settings, 2),
