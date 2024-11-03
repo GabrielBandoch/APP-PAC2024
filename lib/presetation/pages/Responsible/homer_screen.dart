@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
                     'Recibos',
                     Icons.receipt_long,
                     () {
-                      Navigator.pushNamed(context, '/receipts');
+                      Navigator.pushNamed(context, '/recibos');
                     },
                   ),
                   buildIconButton(
