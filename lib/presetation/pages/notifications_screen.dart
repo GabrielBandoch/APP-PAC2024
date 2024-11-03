@@ -46,7 +46,7 @@ class _NotificationsScreen extends State<NotificationsScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Center(  // Centraliza o texto de "Notificações"
+              const Center(
                 child: Text(
                   'Notificações',
                   style: TextStyle(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
-import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
 import 'package:pac20242/presetation/widgets/receipts.dart';
 
 class ReceiptsScreen extends StatefulWidget {
@@ -12,7 +11,6 @@ class ReceiptsScreen extends StatefulWidget {
 }
 
 class _ReceiptsScreenState extends State<ReceiptsScreen> {
-  int _selectedIndex = 2;
   bool isSideMenuOpen = false;
   final String userName = "Gabriel";
   final String avatarUrl = "";
@@ -46,7 +44,7 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
                       userName: 'Gabriel B.',
                       avatarUrl:
                           'https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png',
-                      status: 'Pendente',
+                      status: 'Pago',
                       date: '02/01/2024',
                       amount: 'R\$ 123,23',
                     ),
@@ -54,7 +52,7 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
                       userName: 'Gabriel B.',
                       avatarUrl:
                           'https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png',
-                      status: 'Pendente',
+                      status: 'Pago',
                       date: '03/01/2024',
                       amount: 'R\$ 720,20',
                     ),
@@ -69,7 +67,7 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context); // voltar para pagina anterior apenas (ta em home foi para recibos volta para home exemplo)
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1577EA),
