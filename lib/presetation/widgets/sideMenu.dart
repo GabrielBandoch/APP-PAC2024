@@ -45,7 +45,7 @@ class SideMenu extends StatelessWidget {
                   title: const Text('Início',
                       style: TextStyle(color: Colors.black)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
                   },
                 ),
                 ListTile(
@@ -54,7 +54,7 @@ class SideMenu extends StatelessWidget {
                   title: const Text('Notificações',
                       style: TextStyle(color: Colors.black)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/notification');
                   },
                 ),
                 ListTile(
@@ -63,7 +63,7 @@ class SideMenu extends StatelessWidget {
                   title: const Text('Minha Conta',
                       style: TextStyle(color: Colors.black)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login'); //mudar dps
                   },
                 ),
                 ListTile(
@@ -72,7 +72,7 @@ class SideMenu extends StatelessWidget {
                   title: const Text('Pagamentos',
                       style: TextStyle(color: Colors.black)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/payment');
                   },
                 ),
                 ListTile(
