@@ -199,7 +199,7 @@ class ConfirmCodeScreen extends StatelessWidget {
               height: 48,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/reset');
                   // tem q add a confirmação dps, só ta fznd um navigation
                 },
                 style: ElevatedButton.styleFrom(

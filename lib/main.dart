@@ -11,6 +11,10 @@ import 'package:pac20242/presetation/pages/payment_screen.dart';
 import 'package:pac20242/presetation/pages/receipts_screen.dart';
 import 'package:pac20242/presetation/pages/myAccount_screen.dart';
 import 'package:pac20242/presetation/pages/forgotPass_screen.dart';
+import 'package:pac20242/presetation/pages/forgotPassL_screen.dart';
+import 'package:pac20242/presetation/pages/gov.dart';
+import 'package:pac20242/presetation/pages/Driver/receiptsG.dart';
+
 void main() {
   runApp(MaterialApp(
     home: SplashScreen(),
@@ -27,6 +31,9 @@ void main() {
       '/recibos': (context) => ReceiptsScreen(),
       '/profile': (context) => ProfileScreen(),
       '/esenha': (context) => ForgotPasswordScreen(),
+      '/reset': (context) => ResetPasswordScreen(userName: 'Gabriel'),
+      '/redirect': (context) => RedirectScreen(),
+      '/gerarRecibo': (context) => ReceiptPreviewScreen(),
     },
   ));
 }
