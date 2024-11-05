@@ -25,7 +25,7 @@ class NavigationBarComplete extends StatelessWidget {
             Navigator.pushNamed(context, '/home_driver');
             break;
           case 4:
-            Navigator.pushNamed(context, '/home_driver');
+            Navigator.pushNamed(context, '/profile');
             break;
         }
         onTap(index);
