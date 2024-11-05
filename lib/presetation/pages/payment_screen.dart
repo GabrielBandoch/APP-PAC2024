@@ -45,6 +45,18 @@ class _PaymentScreen extends State<PaymentScreen> {
                 avatarUrl: avatarUrl,
                 onAvatarTap: toggleSideMenu,
               ),
+              const SizedBox(height: 12),
+              const Center(
+                child: Text(
+                  'Pagamentos',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 11, 34, 18),
+
+                  ),
+                ),
+              ),
               const SizedBox(height: 30),
               Expanded(
                 child: SingleChildScrollView(

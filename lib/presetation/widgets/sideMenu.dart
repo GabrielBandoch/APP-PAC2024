@@ -45,7 +45,7 @@ class SideMenu extends StatelessWidget {
                   title: const Text('Início',
                       style: TextStyle(color: Colors.black)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
                   },
                 ),
                 ListTile(
