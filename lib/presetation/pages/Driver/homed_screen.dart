@@ -46,10 +46,10 @@ class _HomeScreenState extends State<HomeScreenDriver> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton('Cadastro', Icons.person_add_alt),
-                  buildIconButton('Pagamentos', Icons.attach_money),
-                  buildIconButton('Relatórios', Icons.receipt_long),
-                  buildIconButton('Corrida', Icons.location_on),
+                  buildIconButton('Cadastro', Icons.person_add_alt, '/createClass'),
+                  buildIconButton('Pagamentos', Icons.attach_money, '/payment'),
+                  buildIconButton('Recibos', Icons.receipt_long, '/recibos'),
+                  buildIconButton('Corrida', Icons.location_on, '/race'),
                 ],
               ),
               const Spacer(),
@@ -60,7 +60,9 @@ class _HomeScreenState extends State<HomeScreenDriver> {
                   width: 320,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/race');
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1577EA),
                       shape: RoundedRectangleBorder(
@@ -108,7 +110,7 @@ class _HomeScreenState extends State<HomeScreenDriver> {
     );
   }
 
-  Widget buildIconButton(String label, IconData icon) {
+  Widget buildIconButton(String label, IconData icon, String route) {
     return Column(
       children: [
         Container(
@@ -116,13 +118,18 @@ class _HomeScreenState extends State<HomeScreenDriver> {
             border: Border.all(color: const Color(0xFF1577EA), width: 2),
             borderRadius: BorderRadius.circular(30),
           ),
-          child: CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.white,
-            child: Icon(
-              icon,
-              size: 30,
-              color: Colors.black,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, route);
+            },
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.white,
+              child: Icon(
+                icon,
+                size: 30,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

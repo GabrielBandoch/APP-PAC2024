@@ -5,7 +5,12 @@ class UserGreeting extends StatelessWidget {
   final String avatarUrl;
   final VoidCallback onAvatarTap;
 
-  const UserGreeting({super.key, required this.userName, required this.avatarUrl, required this.onAvatarTap});
+  const UserGreeting({
+    super.key,
+    required this.userName,
+    required this.avatarUrl,
+    required this.onAvatarTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class UserGreeting extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: onAvatarTap, 
+              onTap: onAvatarTap,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(avatarUrl),
                 radius: 24,
@@ -41,12 +46,17 @@ class UserGreeting extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.notifications,
-              color: Colors.black,
-              size: 28,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/notification');
+              },
+              child: const Icon(
+                Icons.notifications,
+                color: Colors.black,
+                size: 28,
+              ),
             ),
           ),
         ],

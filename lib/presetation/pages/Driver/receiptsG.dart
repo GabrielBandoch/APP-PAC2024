@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
-import 'package:pac20242/presetation/widgets/navigationBarReduced.dart';
 import 'package:pac20242/presetation/widgets/receipts.dart';
 
 class ReceiptPreviewScreen extends StatefulWidget {
@@ -90,7 +89,7 @@ class _ReceiptPreviewScreenState extends State<ReceiptPreviewScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBarReduced(
+      bottomNavigationBar: NavigationBarComplete(
         selectedIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),

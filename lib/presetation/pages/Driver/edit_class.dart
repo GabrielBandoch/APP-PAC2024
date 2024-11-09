@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: EditClassPage(),
-    );
-  }
-}
-
 class EditClassPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,10 +21,10 @@ class EditClassPage extends StatelessWidget {
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // Apenas 3 alunos por linha
+                  crossAxisCount: 3,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
-                  childAspectRatio: 0.65, // Ajuste de proporção para evitar overflow
+                  childAspectRatio: 0.65, 
                 ),
                 itemCount: 16,
                 itemBuilder: (context, index) {
@@ -54,7 +40,6 @@ class EditClassPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Botão de Confirmar
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
@@ -64,7 +49,7 @@ class EditClassPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/create_class');
+                    Navigator.pushNamed(context, '/createClass');
                   },
                   child: Text(
                     'Confirmar',
@@ -85,7 +70,7 @@ class EditClassPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
                   onPressed: () {
-                    // Função para cancelar
+                    Navigator.pop(context);
                   },
                   child: Text(
                     'Cancelar',

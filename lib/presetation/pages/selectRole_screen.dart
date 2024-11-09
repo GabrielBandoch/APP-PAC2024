@@ -16,6 +16,13 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   final TextEditingController condutorPhoneController = TextEditingController();
   final TextEditingController alunoNameController = TextEditingController();
   final TextEditingController alunoPhoneController = TextEditingController();
+  final TextEditingController alunoHouseNumberController = TextEditingController();
+  final TextEditingController alunoStreetNameController = TextEditingController();
+  final TextEditingController alunoCityController = TextEditingController();
+  final TextEditingController alunoStateController = TextEditingController();
+  final TextEditingController alunoZipCodeController = TextEditingController();
+
+  final List<String> states = ['SC', 'PR', 'RJ', 'SP', 'MG', 'BA', 'RS', 'ES', 'PE', 'CE'];
 
   void selectCondutor() {
     setState(() {
@@ -51,7 +58,10 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     }
 
     if (isAlunoSelected) {
-      if (alunoNameController.text.isEmpty || alunoPhoneController.text.isEmpty) {
+      if (alunoNameController.text.isEmpty || alunoPhoneController.text.isEmpty ||
+          alunoHouseNumberController.text.isEmpty || alunoStreetNameController.text.isEmpty ||
+          alunoCityController.text.isEmpty || alunoStateController.text.isEmpty ||
+          alunoZipCodeController.text.isEmpty) {
         setState(() {
           errorMessage = 'Por favor, preencha todos os campos.';
         });
@@ -237,15 +247,151 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: alunoHouseNumberController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF5F5F5),
+                  labelText: 'Número da Casa',
+                  hintText: 'Digite o número da casa',
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: alunoStreetNameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF5F5F5),
+                  labelText: 'Nome da Rua',
+                  hintText: 'Digite o nome da rua',
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: alunoCityController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF5F5F5),
+                  labelText: 'Cidade',
+                  hintText: 'Digite a cidade',
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              DropdownButtonFormField<String>(
+                value: alunoStateController.text.isEmpty ? null : alunoStateController.text,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF5F5F5),
+                  labelText: 'Estado',
+                  hintText: 'Selecione o estado',
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                ),
+                items: states.map((state) {
+                  return DropdownMenuItem<String>(
+                    value: state,
+                    child: Text(state),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    alunoStateController.text = value ?? '';
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: alunoZipCodeController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFF5F5F5),
+                  labelText: 'CEP',
+                  hintText: 'Digite o CEP',
+                  hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: const BorderSide(
+                      color: Color(0xFF1577EA),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
             ],
             const SizedBox(height: 30),
             Center(
-              child: errorMessage.isNotEmpty 
-                ? Text(
-                    errorMessage,
-                    style: const TextStyle(color: Colors.red),
-                  )
-                : Container(),
+              child: errorMessage.isNotEmpty
+                  ? Text(
+                      errorMessage,
+                      style: const TextStyle(color: Colors.red),
+                    )
+                  : Container(),
             ),
             Center(
               child: SizedBox(

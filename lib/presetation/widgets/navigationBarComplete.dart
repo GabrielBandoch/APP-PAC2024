@@ -16,13 +16,13 @@ class NavigationBarComplete extends StatelessWidget {
             Navigator.pushNamed(context, '/payment');
             break;
           case 1:
-            Navigator.pushNamed(context, '/home_driver');
+            Navigator.pushNamed(context, '/race');
             break;
           case 2:
             Navigator.pushNamed(context, '/home_driver');
             break;
           case 3:
-            Navigator.pushNamed(context, '/home_driver');
+            Navigator.pushNamed(context, '/createClass');
             break;
           case 4:
             Navigator.pushNamed(context, '/profile');

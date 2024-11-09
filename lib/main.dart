@@ -14,6 +14,10 @@ import 'package:pac20242/presetation/pages/forgotPass_screen.dart';
 import 'package:pac20242/presetation/pages/forgotPassL_screen.dart';
 import 'package:pac20242/presetation/pages/gov.dart';
 import 'package:pac20242/presetation/pages/Driver/receiptsG.dart';
+import 'package:pac20242/presetation/pages/Driver/turma.dart';
+import 'package:pac20242/presetation/pages/Driver/start_race.dart';
+import 'package:pac20242/presetation/pages/Driver/edit_class.dart';
+import 'package:pac20242/presetation/pages/Driver/create_class.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -22,7 +26,7 @@ void main() {
     routes: {
       '/login': (context) => LoginScreen(),
       '/register': (context) => RegisterScreen(),
-      '/complete_profile': (context) => CompleteProfileScreen(),
+      '/complete': (context) => CompleteProfileScreen(),
       '/select_role': (context) => SelectRoleScreen(),
       '/home_driver': (context) => HomeScreenDriver(),
       '/home_resp': (context) => HomeScreenResponsavel(),
@@ -34,6 +38,10 @@ void main() {
       '/reset': (context) => ResetPasswordScreen(userName: 'Gabriel'),
       '/redirect': (context) => RedirectScreen(),
       '/gerarRecibo': (context) => ReceiptPreviewScreen(),
+      '/turmas': (context) => TurmasPage(),
+      '/race': (context) => StartRace(),
+      '/editClass': (context) => EditClassPage(),
+      '/createClass': (context) => CreateClassScreen(),
     },
   ));
 }

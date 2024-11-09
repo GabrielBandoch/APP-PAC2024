@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Criar Turma',
-      debugShowCheckedModeBanner: false,
-      home: CreateClassScreen(),
-    );
-  }
-}
+import 'package:pac20242/presetation/widgets/userGretting.dart';
+import 'package:pac20242/presetation/widgets/sideMenu.dart';
 
 class CreateClassScreen extends StatefulWidget {
   @override
@@ -23,117 +8,162 @@ class CreateClassScreen extends StatefulWidget {
 }
 
 class _CreateClassScreenState extends State<CreateClassScreen> {
-  int _selectedIndex = 2; // Define o índice inicial da BottomNavigationBar
+  int _selectedIndex = 2;
+  bool isSideMenuOpen = false;
+  final String userName = "Gabriel";
+  final String avatarUrl = "";
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/payment');
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/race');
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/home_driver');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/createClass');
+        break;
+      case 4:
+        Navigator.pushNamed(context, '/profile');
+        break;
+    }
+  }
+
+  void toggleSideMenu() {
+    setState(() {
+      isSideMenuOpen = !isSideMenuOpen;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Turmas Existentes',
-          style: TextStyle(
-            fontSize: 24.0,
-            color: Colors.blueAccent,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          SizedBox(height: 20),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 20.0,
-                  mainAxisSpacing: 20.0,
-                  childAspectRatio: 1 / 1.5,
-                ),
-                itemCount: 9,
-                itemBuilder: (context, index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                      side: BorderSide(color: Colors.blueAccent, width: 2.0),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 55),
+              UserGreeting(
+                userName: userName,
+                avatarUrl: avatarUrl,
+                onAvatarTap: toggleSideMenu,
+              ),
+              const SizedBox(height: 30),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 20.0,
+                      childAspectRatio: 1 / 1.5,
                     ),
-                    elevation: 5,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
+                    itemCount: 9,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          side: BorderSide(color: Colors.blueAccent, width: 2.0),
+                        ),
+                        elevation: 5,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.person, size: 40, color: Colors.blueAccent),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.person, size: 40, color: Colors.blueAccent),
+                              ],
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Turma ${String.fromCharCode(65 + index)}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/editClass');
+                              },
+                              child: Text(
+                                'Editar',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  side: BorderSide(color: Colors.blue),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Turma ${String.fromCharCode(65 + index)}',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/edit_class');
-                          },
-                          child: Text(
-                            'Editar',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              side: BorderSide(color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                      ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Lógica para criar nova turma
+                    Navigator.pushNamed(context, '/create_class'); 
+                  },
+                  child: Text(
+                    'Criar Turma',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 48.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
                     ),
-                  );
-                },
+                    backgroundColor: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (isSideMenuOpen)
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: toggleSideMenu,
+                child: Container(
+                  color: Colors.black54,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Lógica de criar nova turma;
-                // Caminho para a próxima página;
-              },
-              child: Text(
-                'Criar Turma',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 48.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                backgroundColor: Colors.blue,
-              ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            left: isSideMenuOpen ? 0 : -250,
+            top: 0,
+            bottom: 0,
+            child: SideMenu(
+              userName: userName,
+              avatarUrl: avatarUrl,
             ),
           ),
         ],
       ),
       bottomNavigationBar: NavigationBarComplete(
         selectedIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-          // Lógica para navegar para diferentes páginas com base no índice selecionado
-        },
+        onTap: _onItemTapped, 
       ),
     );
   }
@@ -151,7 +181,6 @@ class NavigationBarComplete extends StatelessWidget {
       currentIndex: selectedIndex,
       onTap: (index) {
         onTap(index);
-        // Aqui você pode colocar a lógica de navegação, se necessário
       },
       items: [
         BottomNavigationBarItem(

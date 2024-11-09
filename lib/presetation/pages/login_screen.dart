@@ -14,9 +14,9 @@ class LoginScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Image.asset(
-              'assets/images/Decoration1.png', 
+              'assets/images/Decoration1.png',
               fit: BoxFit.cover,
-              height: 350, 
+              height: 350,
             ),
           ),
           Center(
@@ -116,14 +116,19 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      'Esqueceu sua senha?',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/esenha');
+                      },
+                      child: const Text(
+                        'Esqueceu sua senha?',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -197,7 +202,7 @@ class LoginScreen extends StatelessWidget {
                     height: 48,
                     child: TextButton(
                       onPressed: () {
-                            Navigator.pushNamed(context, '/register');
+                        Navigator.pushNamed(context, '/register');
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: const Color(0xFFF5F5F5),
