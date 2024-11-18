@@ -18,6 +18,9 @@ import 'package:pac20242/presetation/pages/Driver/turma.dart';
 import 'package:pac20242/presetation/pages/Driver/start_race.dart';
 import 'package:pac20242/presetation/pages/Driver/edit_class.dart';
 import 'package:pac20242/presetation/pages/Driver/create_class.dart';
+import 'package:pac20242/presetation/pages/Driver/location_class.dart';
+import 'package:pac20242/presetation/pages/Driver/location_students.dart';
+
 
 void main() {
   runApp(MaterialApp(
