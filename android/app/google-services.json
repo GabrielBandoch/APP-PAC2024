@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "573177331590",
+    "project_id": "bibite-add21",
+    "storage_bucket": "bibite-add21.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573177331590:android:aee40a9e5bac65cc53b607",
+        "android_client_info": {
+          "package_name": "com.example.pac20242"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkT5SmxRLgSCTbw8o3NHZlrj_mHmDDKDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

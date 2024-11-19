@@ -19,7 +19,20 @@ import 'package:pac20242/presetation/pages/Driver/start_race.dart';
 import 'package:pac20242/presetation/pages/Driver/edit_class.dart';
 import 'package:pac20242/presetation/pages/Driver/create_class.dart';
 
-void main() {
+//firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:pac20242/utils/firebase_services.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FireStoreServices bd = FireStoreServices();
+  bd.addPayment();
+
   runApp(MaterialApp(
     home: SplashScreen(),
     debugShowCheckedModeBanner: false,

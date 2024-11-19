@@ -11,18 +11,31 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   bool isCondutorSelected = false;
   bool isAlunoSelected = false;
   String errorMessage = '';
-  
+
   final TextEditingController condutorNameController = TextEditingController();
   final TextEditingController condutorPhoneController = TextEditingController();
   final TextEditingController alunoNameController = TextEditingController();
   final TextEditingController alunoPhoneController = TextEditingController();
-  final TextEditingController alunoHouseNumberController = TextEditingController();
-  final TextEditingController alunoStreetNameController = TextEditingController();
+  final TextEditingController alunoHouseNumberController =
+      TextEditingController();
+  final TextEditingController alunoStreetNameController =
+      TextEditingController();
   final TextEditingController alunoCityController = TextEditingController();
   final TextEditingController alunoStateController = TextEditingController();
   final TextEditingController alunoZipCodeController = TextEditingController();
 
-  final List<String> states = ['SC', 'PR', 'RJ', 'SP', 'MG', 'BA', 'RS', 'ES', 'PE', 'CE'];
+  final List<String> states = [
+    'SC',
+    'PR',
+    'RJ',
+    'SP',
+    'MG',
+    'BA',
+    'RS',
+    'ES',
+    'PE',
+    'CE'
+  ];
 
   void selectCondutor() {
     setState(() {
@@ -43,13 +56,14 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   void submit() {
     if (!isCondutorSelected && !isAlunoSelected) {
       setState(() {
-        errorMessage = 'Por favor, selecione Condutor ou Aluno.';
+        errorMessage = 'Por favor, selecione Condutor ou Responsável.';
       });
       return;
     }
 
     if (isCondutorSelected) {
-      if (condutorNameController.text.isEmpty || condutorPhoneController.text.isEmpty) {
+      if (condutorNameController.text.isEmpty ||
+          condutorPhoneController.text.isEmpty) {
         setState(() {
           errorMessage = 'Por favor, preencha todos os campos.';
         });
@@ -58,9 +72,12 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     }
 
     if (isAlunoSelected) {
-      if (alunoNameController.text.isEmpty || alunoPhoneController.text.isEmpty ||
-          alunoHouseNumberController.text.isEmpty || alunoStreetNameController.text.isEmpty ||
-          alunoCityController.text.isEmpty || alunoStateController.text.isEmpty ||
+      if (alunoNameController.text.isEmpty ||
+          alunoPhoneController.text.isEmpty ||
+          alunoHouseNumberController.text.isEmpty ||
+          alunoStreetNameController.text.isEmpty ||
+          alunoCityController.text.isEmpty ||
+          alunoStateController.text.isEmpty ||
           alunoZipCodeController.text.isEmpty) {
         setState(() {
           errorMessage = 'Por favor, preencha todos os campos.';
@@ -71,7 +88,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     setState(() {
       errorMessage = '';
     });
-    
+
     if (isCondutorSelected) {
       Navigator.pushNamed(context, '/home_driver');
     } else {
@@ -105,7 +122,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                   child: ElevatedButton(
                     onPressed: selectCondutor,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isCondutorSelected ? Colors.blue : Colors.white,
+                      backgroundColor:
+                          isCondutorSelected ? Colors.blue : Colors.white,
                       side: const BorderSide(color: Colors.blue),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -127,7 +145,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                   child: ElevatedButton(
                     onPressed: selectAluno,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isAlunoSelected ? Colors.blue : Colors.white,
+                      backgroundColor:
+                          isAlunoSelected ? Colors.blue : Colors.white,
                       side: const BorderSide(color: Colors.blue),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -324,7 +343,9 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField<String>(
-                value: alunoStateController.text.isEmpty ? null : alunoStateController.text,
+                value: alunoStateController.text.isEmpty
+                    ? null
+                    : alunoStateController.text,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: const Color(0xFFF5F5F5),
