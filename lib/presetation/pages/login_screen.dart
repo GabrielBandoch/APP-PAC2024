@@ -1,7 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:pac20242/utils/firebase_auth.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreen createState() => _LoginScreen();
+}
+
+class _LoginScreen extends State<LoginScreen> {
+  final AuthService _auth = AuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  bool _SenhaVisivel = false;
+
+  Future<void> _login() async {
+    final user = await _auth.loginInWithEmail(
+      context,
+      _emailController.text,
+      _senhaController.text,
+    );
+    if (user != null) {
+      print("Login bem-sucedido!");
+    } else {
+      print("Erro no login");
+    }
+  }
+
+  void _IconSenhaVisivel() {
+    setState(() {
+      _SenhaVisivel = !_SenhaVisivel;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +88,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xFFF5F5F5),
@@ -92,13 +124,21 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   TextField(
-                    obscureText: true,
+                    controller: _senhaController,
+                    obscureText: !_SenhaVisivel,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xFFF5F5F5),
                       hintText: 'Senha',
                       hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
-                      suffixIcon: const Icon(Icons.visibility),
+                      suffixIcon: IconButton(
+                        onPressed: _IconSenhaVisivel,
+                        icon: Icon(
+                          _SenhaVisivel
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
                         borderSide: const BorderSide(
@@ -138,7 +178,7 @@ class LoginScreen extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/home_resp');
+                        _login();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1577EA),

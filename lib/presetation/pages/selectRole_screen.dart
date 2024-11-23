@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pac20242/utils/firebase_services.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   const SelectRoleScreen({super.key});
@@ -8,12 +9,16 @@ class SelectRoleScreen extends StatefulWidget {
 }
 
 class _SelectRoleScreenState extends State<SelectRoleScreen> {
+  final FireStoreServices _storeServices = FireStoreServices();
   bool isCondutorSelected = false;
   bool isAlunoSelected = false;
   String errorMessage = '';
 
+  // Condutor
   final TextEditingController condutorNameController = TextEditingController();
   final TextEditingController condutorPhoneController = TextEditingController();
+
+  // Aluno
   final TextEditingController alunoNameController = TextEditingController();
   final TextEditingController alunoPhoneController = TextEditingController();
   final TextEditingController alunoHouseNumberController =
@@ -53,7 +58,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     });
   }
 
-  void submit() {
+  Future<void> _submit() async {
     if (!isCondutorSelected && !isAlunoSelected) {
       setState(() {
         errorMessage = 'Por favor, selecione Condutor ou Responsável.';
@@ -69,6 +74,14 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         });
         return;
       }
+
+      // Chamando função para adicionar o condutor
+      await _storeServices.addCondutor(
+          condutorNameController.text, condutorPhoneController.text);
+
+      // Limpar campos
+      condutorNameController.clear();
+      condutorPhoneController.clear();
     }
 
     if (isAlunoSelected) {
@@ -84,16 +97,31 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         });
         return;
       }
+
+      // Chamando função para adicionar o aluno
+      await _storeServices.addAluno(
+          alunoNameController.text,
+          alunoPhoneController.text,
+          alunoHouseNumberController.text,
+          alunoStreetNameController.text,
+          alunoCityController.text,
+          alunoStateController.text,
+          alunoZipCodeController.text);
+
+      // Limpar campos
+      alunoNameController.clear();
+      alunoPhoneController.clear();
+      alunoHouseNumberController.clear();
+      alunoStreetNameController.clear();
+      alunoCityController.clear();
+      alunoStateController.clear();
+      alunoZipCodeController.clear();
     }
     setState(() {
       errorMessage = '';
     });
 
-    if (isCondutorSelected) {
-      Navigator.pushNamed(context, '/home_driver');
-    } else {
-      Navigator.pushNamed(context, '/home_resp');
-    }
+    Navigator.pushNamed(context, '/login');
   }
 
   @override
@@ -418,7 +446,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: submit,
+                  onPressed: _submit,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF1577EA),
                     shape: RoundedRectangleBorder(

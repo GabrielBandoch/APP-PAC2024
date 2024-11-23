@@ -22,7 +22,6 @@ import 'package:pac20242/presetation/pages/Driver/create_class.dart';
 //firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:pac20242/utils/firebase_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +29,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FireStoreServices bd = FireStoreServices();
-  bd.addPayment();
+  // FireStoreServices bd = FireStoreServices();
+  // bd.addPayment();
 
   runApp(MaterialApp(
     home: SplashScreen(),

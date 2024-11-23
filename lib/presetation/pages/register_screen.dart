@@ -1,13 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:pac20242/utils/firebase_auth.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
+  _RegisterScreen createState() => _RegisterScreen();
+}
+
+class _RegisterScreen extends State<RegisterScreen> {
   final AuthService _auth = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
+
+  bool _SenhaVisivel = false;
+
+  Future<void> _register() async {
+    final user = await _auth.registerWithEmail(
+      _emailController.text,
+      _senhaController.text,
+    );
+    if (user != null) {
+      print("registro bem-sucedido!");
+      Navigator.pushNamed(context, '/complete');
+    } else {
+      print("Erro no registro");
+    }
+  }
+
+  void _IconSenhaVisivel() {
+    setState(() {
+      _SenhaVisivel = !_SenhaVisivel;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +103,7 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       TextField(
+                        controller: _emailController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color(0xFFF5F5F5),
@@ -113,13 +139,21 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       TextField(
-                        obscureText: true,
+                        controller: _senhaController,
+                        obscureText: !_SenhaVisivel,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color(0xFFF5F5F5),
                           hintText: 'Senha',
                           hintStyle: const TextStyle(color: Color(0xFFBCBCBC)),
-                          suffixIcon: const Icon(Icons.visibility),
+                          suffixIcon: IconButton(
+                            onPressed: _IconSenhaVisivel,
+                            icon: Icon(
+                              _SenhaVisivel
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                             borderSide: const BorderSide(
@@ -142,7 +176,7 @@ class RegisterScreen extends StatelessWidget {
                         height: 48,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/complete');
+                            _register();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1577EA),
