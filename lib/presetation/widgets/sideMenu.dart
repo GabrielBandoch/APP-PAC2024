@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatelessWidget {
@@ -5,6 +6,10 @@ class SideMenu extends StatelessWidget {
   final String avatarUrl;
 
   const SideMenu({super.key, required this.userName, required this.avatarUrl});
+
+  Future<void> singOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +85,15 @@ class SideMenu extends StatelessWidget {
                         const Icon(Icons.exit_to_app, color: Color(0xFF0056B3)),
                     title: const Text('Sair',
                         style: TextStyle(color: Colors.black)),
-                    onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/login', (Route<dynamic> route) => false);
+                    onTap: () async {
+                      await singOut();
+                      User? user = FirebaseAuth.instance.currentUser;
+                      if (user == null) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/login', (Route<dynamic> route) => false);
+                      } else {
+                        print("Erro ao realizar logout");
+                      }
                     }),
               ],
             ),

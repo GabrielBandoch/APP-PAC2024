@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pac20242/Provider/userProvider.dart';
 import 'package:pac20242/utils/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -22,7 +24,20 @@ class _LoginScreen extends State<LoginScreen> {
       _senhaController.text,
     );
     if (user != null) {
-      print("Login bem-sucedido!");
+      // Atualiza o estado no UserProvider com o tipo de usuário
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+      String userType =
+          userProvider.userRole ?? 'desconhecido'; // Valor default
+      if (userType == 'aluno') {
+        print('Sucesso no login');
+        Navigator.pushReplacementNamed(context, '/home_resp');
+      } else if (userType == 'condutor') {
+        print('Sucesso no login');
+        Navigator.pushReplacementNamed(context, '/home_driver');
+      } else {
+        print("Erro no tipo de usuário.");
+      }
     } else {
       print("Erro no login");
     }

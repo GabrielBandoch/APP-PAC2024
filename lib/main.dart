@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pac20242/Provider/userProvider.dart';
+import 'package:provider/provider.dart';
 import 'package:pac20242/presetation/pages/notifications_screen.dart';
 import 'package:pac20242/presetation/pages/splash_screen.dart';
 import 'package:pac20242/presetation/pages/login_screen.dart';
@@ -19,7 +21,7 @@ import 'package:pac20242/presetation/pages/Driver/start_race.dart';
 import 'package:pac20242/presetation/pages/Driver/edit_class.dart';
 import 'package:pac20242/presetation/pages/Driver/create_class.dart';
 
-//firebase
+// Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -32,28 +34,40 @@ void main() async {
   // FireStoreServices bd = FireStoreServices();
   // bd.addPayment();
 
-  runApp(MaterialApp(
-    home: SplashScreen(),
-    debugShowCheckedModeBanner: false,
-    routes: {
-      '/login': (context) => LoginScreen(),
-      '/register': (context) => RegisterScreen(),
-      '/complete': (context) => CompleteProfileScreen(),
-      '/select_role': (context) => SelectRoleScreen(),
-      '/home_driver': (context) => HomeScreenDriver(),
-      '/home_resp': (context) => HomeScreenResponsavel(),
-      '/payment': (context) => PaymentScreen(),
-      '/notification': (context) => NotificationsScreen(),
-      '/recibos': (context) => ReceiptsScreen(),
-      '/profile': (context) => ProfileScreen(),
-      '/esenha': (context) => ForgotPasswordScreen(),
-      '/reset': (context) => ResetPasswordScreen(userName: 'Gabriel'),
-      '/redirect': (context) => RedirectScreen(),
-      '/gerarRecibo': (context) => ReceiptPreviewScreen(),
-      '/turmas': (context) => TurmasPage(),
-      '/race': (context) => StartRace(),
-      '/editClass': (context) => EditClassPage(),
-      '/createClass': (context) => CreateClassScreen(),
-    },
-  ));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen(),
+        '/complete': (context) => CompleteProfileScreen(),
+        '/select_role': (context) => SelectRoleScreen(),
+        '/home_driver': (context) => HomeScreenDriver(),
+        '/home_resp': (context) => HomeScreenResponsavel(),
+        '/payment': (context) => PaymentScreen(),
+        '/notification': (context) => NotificationsScreen(),
+        '/recibos': (context) => ReceiptsScreen(),
+        '/profile': (context) => ProfileScreen(),
+        '/esenha': (context) => ForgotPasswordScreen(),
+        '/reset': (context) => ResetPasswordScreen(userName: 'Gabriel'),
+        '/redirect': (context) => RedirectScreen(),
+        '/gerarRecibo': (context) => ReceiptPreviewScreen(),
+        '/turmas': (context) => TurmasPage(),
+        '/race': (context) => StartRace(),
+        '/editClass': (context) => EditClassPage(),
+        '/createClass': (context) => CreateClassScreen(),
+      },
+    );
+  }
 }
