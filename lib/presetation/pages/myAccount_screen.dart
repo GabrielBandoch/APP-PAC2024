@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
@@ -75,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  void _deleteAccount() {
+  void _deleteAccount() async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -84,15 +85,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
           content: const Text('Tem certeza que deseja deletar sua conta?'),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(context), // Fecha o diálogo
               child: const Text('Cancelar'),
             ),
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Conta deletada com sucesso.')),
-                );
+              onPressed: () async {
+                Navigator.pop(
+                    context); // Fecha o diálogo antes de continuar com as operações
+
+                try {
+                  // Acesse o Provider antes de qualquer navegação
+                  final userProvider =
+                      Provider.of<UserProvider>(context, listen: false);
+                  String userId = userProvider.user!.uid;
+                  String userRole = userProvider.userRole ?? 'aluno';
+
+                  // Excluir conta e dados do Firestore
+                  await _firestoreServices.deleteAccount(userId, userRole);
+
+                  // Excluir a conta do Firebase Authentication
+                  await FirebaseAuth.instance.signOut();
+
+                  // Aguardar a conclusão da exclusão antes de navegar
+                  await Future.delayed(Duration(
+                      seconds:
+                          1)); // Atraso opcional para garantir que o estado foi atualizado
+
+                  // Redirecionar para a página de login
+                  Navigator.pushReplacementNamed(context, '/login');
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Conta deletada com sucesso.')),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Erro ao excluir conta: $e')),
+                  );
+                }
               },
               child: const Text('Deletar'),
             ),
@@ -102,14 +132,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // Função para salvar as alterações
   void _saveChanges() async {
     try {
+      // Atualiza o mapa userData com os valores dos campos
+      userData['nome'] = nomeController.text;
+      userData['telefone'] = telefoneController.text;
+      userData['email'] = emailController.text;
+      userData['numeroCasa'] = numeroCasaController.text;
+      userData['nomeRua'] = nomeRuaController.text;
+      userData['cidade'] = cidadeController.text;
+      userData['estado'] = estadoController.text;
+      userData['cep'] = cepController.text;
+
       if (userRole == 'aluno') {
         await _firestoreServices.updateAluno(userId, userData);
       } else {
         await _firestoreServices.updateCondutor(userId, userData);
       }
+
+      // Recarrega os dados para refletir as alterações
+      _loadUserData();
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Dados atualizados com sucesso.')),

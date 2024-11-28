@@ -117,7 +117,39 @@ class FireStoreServices {
       print('Erro ao atualizar dados do condutor: $e');
     }
   }
+
+  Future<void> deleteAluno(String userId) async {
+    await FirebaseFirestore.instance.collection('aluno').doc(userId).delete();
+  }
+
+  Future<void> deleteCondutor(String userId) async {
+    await FirebaseFirestore.instance
+        .collection('condutor')
+        .doc(userId)
+        .delete();
+  }
+
+  Future<void> deleteAccount(String userId, String userRole) async {
+    // Excluir os dados do Firestore dependendo do papel (aluno ou condutor)
+    if (userRole == 'aluno') {
+      await deleteAluno(userId);
+    } else {
+      await deleteCondutor(userId);
+    }
+
+    // Excluir a conta no Firebase Authentication
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await user.delete();
+      }
+    } catch (e) {
+      print('Erro ao excluir conta: $e');
+      throw Exception('Erro ao excluir conta');
+    }
+  }
 }
+
 
 
 // if (isSideMenuOpen)
