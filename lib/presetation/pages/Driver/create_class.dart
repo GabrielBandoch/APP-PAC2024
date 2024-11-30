@@ -124,8 +124,7 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Lógica para criar nova turma
-                    Navigator.pushNamed(context, '/create_class'); 
+                    Navigator.pushNamed(context, '/locationClass');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 48.0),

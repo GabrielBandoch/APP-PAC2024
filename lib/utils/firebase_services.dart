@@ -148,6 +148,179 @@ class FireStoreServices {
       throw Exception('Erro ao excluir conta');
     }
   }
+
+  // Turmas
+
+  // Criar turma vinculada ao motorista logado
+  Future<void> criarTurma(
+      String nomeTurma, List<String> alunosSelecionados) async {
+    try {
+      User? motorista = FirebaseAuth.instance.currentUser;
+
+      if (motorista == null) {
+        throw Exception('Motorista não autenticado.');
+      }
+
+      final turmaDoc = FirebaseFirestore.instance.collection('turmas').doc();
+      List<Map<String, dynamic>> alunosComEndereco = [];
+
+      // Buscar informações dos alunos selecionados
+      for (String alunoId in alunosSelecionados) {
+        final alunoDoc = await FirebaseFirestore.instance
+            .collection('aluno')
+            .doc(alunoId)
+            .get();
+
+        if (alunoDoc.exists) {
+          final alunoData = alunoDoc.data();
+          alunosComEndereco.add({
+            "uid": alunoId,
+            "nome": alunoData!['nome'],
+            "endereco": {
+              "estado": alunoData['estado'],
+              "cidade": alunoData['cidade'],
+              "nomeRua": alunoData['nomeRua'],
+              "numeroCasa": alunoData['numeroCasa'],
+              "cep": alunoData['cep'],
+            },
+          });
+        }
+      }
+
+      // Criar a turma com o ID do motorista associado
+      await turmaDoc.set({
+        "id": turmaDoc.id,
+        "nome": nomeTurma,
+        "motoristaId": motorista.uid,
+        "alunos": alunosComEndereco,
+        "criadoEm": FieldValue.serverTimestamp(),
+      });
+
+      print(
+          'Turma criada com sucesso e vinculada ao motorista ${motorista.uid}.');
+    } catch (e) {
+      print('Erro ao criar turma: $e');
+    }
+  }
+
+  // Adicionar aluno na turma
+  Future<void> adicionarAlunoNaTurma(String turmaId, String alunoId) async {
+    try {
+      User? motorista = FirebaseAuth.instance.currentUser;
+
+      if (motorista == null) {
+        throw Exception('Motorista não autenticado.');
+      }
+
+      final turmaDoc =
+          FirebaseFirestore.instance.collection('turmas').doc(turmaId);
+
+      final turmaData = await turmaDoc.get();
+
+      if (!turmaData.exists) {
+        throw Exception('Turma não encontrada.');
+      }
+
+      if (turmaData.data()?['motoristaId'] != motorista.uid) {
+        throw Exception('Você não tem permissão para modificar esta turma.');
+      }
+
+      final alunoDoc = await FirebaseFirestore.instance
+          .collection('aluno')
+          .doc(alunoId)
+          .get();
+
+      if (alunoDoc.exists) {
+        final alunoData = alunoDoc.data();
+        final alunoComEndereco = {
+          "uid": alunoId,
+          "nome": alunoData!['nome'],
+          "endereco": {
+            "estado": alunoData['estado'],
+            "cidade": alunoData['cidade'],
+            "nomeRua": alunoData['nomeRua'],
+            "numeroCasa": alunoData['numeroCasa'],
+            "cep": alunoData['cep'],
+          },
+        };
+
+        await turmaDoc.update({
+          "alunos": FieldValue.arrayUnion([alunoComEndereco]),
+        });
+
+        print('Aluno adicionado à turma com sucesso.');
+      } else {
+        throw Exception('Aluno não encontrado.');
+      }
+    } catch (e) {
+      print('Erro ao adicionar aluno à turma: $e');
+    }
+  }
+
+  // Remover Aluno
+  Future<void> removerAlunoDaTurma(String turmaId, String alunoId) async {
+    try {
+      User? motorista = FirebaseAuth.instance.currentUser;
+
+      if (motorista == null) {
+        throw Exception('Motorista não autenticado.');
+      }
+
+      final turmaDoc =
+          FirebaseFirestore.instance.collection('turmas').doc(turmaId);
+
+      final turmaData = await turmaDoc.get();
+
+      if (!turmaData.exists) {
+        throw Exception('Turma não encontrada.');
+      }
+
+      if (turmaData.data()?['motoristaId'] != motorista.uid) {
+        throw Exception('Você não tem permissão para modificar esta turma.');
+      }
+
+      List<dynamic> alunos = turmaData.data()?['alunos'] ?? [];
+      alunos.removeWhere((aluno) => aluno['uid'] == alunoId);
+
+      await turmaDoc.update({
+        "alunos": alunos,
+      });
+
+      print('Aluno removido da turma com sucesso.');
+    } catch (e) {
+      print('Erro ao remover aluno da turma: $e');
+    }
+  }
+
+  // Deletar Turma
+  Future<void> deletarTurma(String turmaId) async {
+    try {
+      User? motorista = FirebaseAuth.instance.currentUser;
+
+      if (motorista == null) {
+        throw Exception('Motorista não autenticado.');
+      }
+
+      final turmaDoc =
+          FirebaseFirestore.instance.collection('turmas').doc(turmaId);
+
+      final turmaData = await turmaDoc.get();
+
+      if (!turmaData.exists) {
+        throw Exception('Turma não encontrada.');
+      }
+
+      if (turmaData.data()?['motoristaId'] != motorista.uid) {
+        throw Exception('Você não tem permissão para deletar esta turma.');
+      }
+
+      await turmaDoc.delete();
+
+      print('Turma deletada com sucesso.');
+    } catch (e) {
+      print('Erro ao deletar turma: $e');
+    }
+  }
 }
 
 

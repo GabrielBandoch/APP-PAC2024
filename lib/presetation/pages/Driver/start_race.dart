@@ -132,7 +132,7 @@ class _StartRace extends State<StartRace> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          // Ação para "Sim"
+                          Navigator.pushNamed(context, '/locatinStudent');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,

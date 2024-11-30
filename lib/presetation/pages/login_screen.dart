@@ -16,19 +16,26 @@ class _LoginScreen extends State<LoginScreen> {
   final TextEditingController _senhaController = TextEditingController();
 
   bool _SenhaVisivel = false;
+  String _errorMessage = '';
 
   Future<void> _login() async {
+    if (_emailController.text.isEmpty || _senhaController.text.isEmpty) {
+      setState(() {
+        _errorMessage = 'Por favor, preencha todos os campos.';
+      });
+      return;
+    }
+
     final user = await _auth.loginInWithEmail(
       context,
       _emailController.text,
       _senhaController.text,
     );
-    if (user != null) {
-      // Atualiza o estado no UserProvider com o tipo de usuário
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-      String userType =
-          userProvider.userRole ?? 'desconhecido'; // Valor default
+    if (user != null) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      String userType = userProvider.userRole ?? 'desconhecido';
+
       if (userType == 'aluno') {
         print('Sucesso no login');
         Navigator.pushReplacementNamed(context, '/home_resp');
@@ -36,10 +43,14 @@ class _LoginScreen extends State<LoginScreen> {
         print('Sucesso no login');
         Navigator.pushReplacementNamed(context, '/home_driver');
       } else {
-        print("Erro no tipo de usuário.");
+        setState(() {
+          _errorMessage = "Erro no tipo de usuário.";
+        });
       }
     } else {
-      print("Erro no login");
+      setState(() {
+        _errorMessage = 'Usuário ou senha incorretos.';
+      });
     }
   }
 
@@ -212,6 +223,20 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 16),
+                  // Exibe a mensagem de erro
+                  if (_errorMessage.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        _errorMessage,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   const SizedBox(height: 32),
                   const Row(
                     children: [

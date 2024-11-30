@@ -1,14 +1,12 @@
-// só precisa fazer a lógica para mudar a navigationbar quando for condutor ou responsavel para 
-// NavigationBarReduced ou NavigationBarComplete
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/widgets/navigationBarReduced.dart';
+import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
+import 'package:pac20242/presetation/widgets/navigationBarReduced.dart'; 
 import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 import 'package:pac20242/presetation/widgets/statusCard.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
-
   @override
   _PaymentScreen createState() => _PaymentScreen();
 }
@@ -18,6 +16,13 @@ class _PaymentScreen extends State<PaymentScreen> {
   bool isSideMenuOpen = false;
   final String userName = "Gabriel";
   final String avatarUrl = ""; 
+  late String userRole; 
+
+  @override
+  void initState() {
+    super.initState();
+    userRole = "aluno";
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -53,7 +58,6 @@ class _PaymentScreen extends State<PaymentScreen> {
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 11, 34, 18),
-
                   ),
                 ),
               ),
@@ -109,10 +113,15 @@ class _PaymentScreen extends State<PaymentScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBarReduced(
-        selectedIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: userRole == 'aluno'
+          ? NavigationBarReduced(
+              selectedIndex: _selectedIndex,
+              onTap: _onItemTapped,
+            )
+          : NavigationBarComplete(
+              selectedIndex: _selectedIndex,
+              onTap: _onItemTapped,
+            ),
     );
   }
 

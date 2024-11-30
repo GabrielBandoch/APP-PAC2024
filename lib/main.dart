@@ -20,6 +20,9 @@ import 'package:pac20242/presetation/pages/Driver/turma.dart';
 import 'package:pac20242/presetation/pages/Driver/start_race.dart';
 import 'package:pac20242/presetation/pages/Driver/edit_class.dart';
 import 'package:pac20242/presetation/pages/Driver/create_class.dart';
+import 'package:pac20242/presetation/pages/Driver/locationClass.dart';
+import 'package:pac20242/presetation/pages/Driver/locationStudent.dart';
+import 'package:pac20242/presetation/pages/Driver/reschedule_payment.dart';
 
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
@@ -65,10 +68,13 @@ class MyApp extends StatelessWidget {
         '/reset': (context) => const ResetPasswordScreen(),
         '/redirect': (context) => const RedirectScreen(),
         '/gerarRecibo': (context) => const ReceiptPreviewScreen(),
-        '/turmas': (context) => TurmasPage(),
-        '/race': (context) => StartRace(),
-        '/editClass': (context) => EditClassPage(),
-        '/createClass': (context) => CreateClassScreen(),
+        '/locationClass': (context) => const CreateClassPage(),
+        '/locatinStudent': (context) => location_s(),
+        '/reschedulePayment': (context) => SchedulePaymentPage(),
+        '/turmas': (context) => const TurmasPage(),
+        '/race': (context) => const StartRace(),
+        '/editClass': (context) => const EditClassPage(),
+        '/createClass': (context) => const CreateClassScreen(),
       },
     );
   }
