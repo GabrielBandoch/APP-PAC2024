@@ -1,9 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
-  final String userName;
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
-  const ResetPasswordScreen({super.key, required this.userName});
+  @override
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+}
+
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  Future<void> resetPassword(BuildContext context) async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('As senhas não correspondem.')),
+      );
+      return;
+    }
+
+    try {
+      String? oobCode = Uri.base.queryParameters['oobCode'];
+      if (oobCode == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Erro: código de redefinição não encontrado.')),
+        );
+        return;
+      }
+
+      await FirebaseAuth.instance.confirmPasswordReset(
+        code: oobCode,
+        newPassword: _passwordController.text,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Senha alterada com sucesso.')),
+      );
+      Navigator.pushReplacementNamed(context, '/login');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao redefinir a senha. Tente novamente.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,124 +55,41 @@ class ResetPasswordScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 100),
-            Text(
-              'Olá, $userName',
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              textAlign: TextAlign.center,
+            const Text(
+              'Redefinir a senha',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 40),
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 'Digite uma nova senha',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
             const SizedBox(height: 12),
             TextField(
+              controller: _passwordController,
               obscureText: true,
-              style: const TextStyle(color: Colors.white), 
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFF1577EA),
-                hintText: 'Nova senha',
-                hintStyle: const TextStyle(color: Colors.white), 
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: Color(0xFF1577EA),
-                    width: 2,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Repita a nova senha',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              ),
+              decoration: InputDecoration(hintText: 'Nova senha'),
             ),
             const SizedBox(height: 12),
             TextField(
+              controller: _confirmPasswordController,
               obscureText: true,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFF1577EA),
-                hintText: 'Repita a senha',
-                hintStyle: const TextStyle(color: Colors.white),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: Color(0xFF1577EA),
-                    width: 2,
-                  ),
-                ),
-              ),
+              decoration: InputDecoration(hintText: 'Repita a senha'),
             ),
             const SizedBox(height: 32),
-            SizedBox(
-              width: 287,
-              height: 48,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Lógica para resetar a senha
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1577EA),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: const Text(
-                  'Enviar',
-                  style: TextStyle(
+            ElevatedButton(
+              onPressed: () {
+                resetPassword(context);
+              },
+              child: const Text(
+                'Confirmar',
+                style: TextStyle(
                     fontSize: 20,
-                    fontFamily: 'OpenSans',
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const Spacer(),
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(bottom: 35),
-              child: SizedBox(
-                width: 320,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1577EA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'Voltar',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
           ],

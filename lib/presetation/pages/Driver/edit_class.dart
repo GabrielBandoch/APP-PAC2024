@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class EditClassPage extends StatelessWidget {
+  const EditClassPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Editando TURMA A',
           style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         ),
@@ -20,7 +22,7 @@ class EditClassPage extends StatelessWidget {
           children: [
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
@@ -36,7 +38,7 @@ class EditClassPage extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -46,12 +48,12 @@ class EditClassPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/createClass');
                   },
-                  child: Text(
+                  child: const Text(
                     'Confirmar',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -67,12 +69,12 @@ class EditClassPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     'Cancelar',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -91,6 +93,8 @@ class EditClassPage extends StatelessWidget {
 }
 
 class StudentTile extends StatelessWidget {
+  const StudentTile({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -103,10 +107,10 @@ class StudentTile extends StatelessWidget {
             color: Colors.blue,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(Icons.person, color: Colors.white, size: 30),
+          child: const Icon(Icons.person, color: Colors.white, size: 30),
         ),
-        SizedBox(height: 8),
-        Text(
+        const SizedBox(height: 8),
+        const Text(
           'Gabriel Bandoch',
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
@@ -115,7 +119,7 @@ class StudentTile extends StatelessWidget {
           onPressed: () {
             // Função para remover o aluno
           },
-          child: Text(
+          child: const Text(
             'Remover',
             style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
           ),
@@ -126,13 +130,15 @@ class StudentTile extends StatelessWidget {
 }
 
 class AddStudentButton extends StatelessWidget {
+  const AddStudentButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         // Função para adicionar um novo aluno
       },
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(

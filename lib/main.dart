@@ -43,26 +43,28 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(),
-        '/complete': (context) => CompleteProfileScreen(),
-        '/select_role': (context) => SelectRoleScreen(),
-        '/home_driver': (context) => HomeScreenDriver(),
-        '/home_resp': (context) => HomeScreenResponsavel(),
-        '/payment': (context) => PaymentScreen(),
-        '/notification': (context) => NotificationsScreen(),
-        '/recibos': (context) => ReceiptsScreen(),
-        '/profile': (context) => ProfileScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
+        '/complete': (context) => const CompleteProfileScreen(),
+        '/select_role': (context) => const SelectRoleScreen(),
+        '/home_driver': (context) => const HomeScreenDriver(),
+        '/home_resp': (context) => const HomeScreenResponsavel(),
+        '/payment': (context) => const PaymentScreen(),
+        '/notification': (context) => const NotificationsScreen(),
+        '/recibos': (context) => const ReceiptsScreen(),
+        '/profile': (context) => const ProfileScreen(),
         '/esenha': (context) => ForgotPasswordScreen(),
-        '/reset': (context) => ResetPasswordScreen(userName: 'Gabriel'),
-        '/redirect': (context) => RedirectScreen(),
-        '/gerarRecibo': (context) => ReceiptPreviewScreen(),
+        '/reset': (context) => const ResetPasswordScreen(),
+        '/redirect': (context) => const RedirectScreen(),
+        '/gerarRecibo': (context) => const ReceiptPreviewScreen(),
         '/turmas': (context) => TurmasPage(),
         '/race': (context) => StartRace(),
         '/editClass': (context) => EditClassPage(),

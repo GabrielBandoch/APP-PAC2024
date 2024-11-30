@@ -71,11 +71,11 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
                 ],
               ),
               const SizedBox(height: 30),
-              Expanded(
+              const Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                       StatusCard(
                         userName: "Gabriel",
                         avatarUrl:
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
                         status: "Atrasado",
                         date: "03/01/2024",
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

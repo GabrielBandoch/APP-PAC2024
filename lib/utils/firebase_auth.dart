@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pac20242/Provider/userProvider.dart';
@@ -66,13 +65,45 @@ class AuthService {
     return _auth.authStateChanges();
   }
 
-  // Reset de senha, olhar mais tarde
-  Future<void> resetPassword(String email) async {
+  Future<void> resetPassword(BuildContext context, String email) async {
+    if (email.isEmpty ||
+        RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")
+            .hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Por favor, insira um e-mail válido.")));
+      return;
+    }
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
+
     try {
       await _auth.sendPasswordResetEmail(email: email);
-      print("Email de reset enviado.");
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("E-Mail de redefinição enviado com sucesso.")));
     } catch (e) {
-      print("Erro ao enviar email de reset: $e");
+      Navigator.of(context).pop();
+      String errorMessage = "Erro desconhecido, tenta novamente mais tarde.";
+
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'invalid-email':
+            errorMessage = "O e-mail fornecido não é válido.";
+            break;
+          case 'user-not-found':
+            errorMessage = "Nenhum usuário encontrado com esse e-mail.";
+            break;
+          default:
+            errorMessage = "Erro ao enviar o e-mail de redefinição de senha.";
+            break;
+        }
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
     }
   }
 }

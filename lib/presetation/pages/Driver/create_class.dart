@@ -3,6 +3,8 @@ import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 
 class CreateClassScreen extends StatefulWidget {
+  const CreateClassScreen({super.key});
+
   @override
   _CreateClassScreenState createState() => _CreateClassScreenState();
 }
@@ -62,7 +64,7 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 20.0,
                       mainAxisSpacing: 20.0,
@@ -73,42 +75,42 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                       return Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
-                          side: BorderSide(color: Colors.blueAccent, width: 2.0),
+                          side: const BorderSide(color: Colors.blueAccent, width: 2.0),
                         ),
                         elevation: 5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.person, size: 40, color: Colors.blueAccent),
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               'Turma ${String.fromCharCode(65 + index)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blueAccent,
                               ),
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, '/editClass');
                               },
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  side: const BorderSide(color: Colors.blue),
+                                ),
+                              ),
                               child: Text(
                                 'Editar',
                                 style: TextStyle(color: Colors.blue),
-                              ),
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  side: BorderSide(color: Colors.blue),
-                                ),
                               ),
                             ),
                           ],
@@ -125,16 +127,16 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                     // Lógica para criar nova turma
                     Navigator.pushNamed(context, '/create_class'); 
                   },
-                  child: Text(
-                    'Criar Turma',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 48.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 48.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     backgroundColor: Colors.blue,
+                  ),
+                  child: Text(
+                    'Criar Turma',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
               ),

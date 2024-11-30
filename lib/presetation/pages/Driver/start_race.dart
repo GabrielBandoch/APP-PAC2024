@@ -3,6 +3,8 @@ import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 
 class StartRace extends StatefulWidget {
+  const StartRace({super.key});
+
   @override
   _StartRace createState() => _StartRace();
 }
@@ -183,7 +185,7 @@ class _StartRace extends State<StartRace> {
             left: isSideMenuOpen ? 0 : -250,
             top: 0,
             bottom: 0,
-            child: SideMenu(
+            child: const SideMenu(
               userName: 'Francisco Costa',
               avatarUrl: 'https://example.com/avatar.jpg',
             ),

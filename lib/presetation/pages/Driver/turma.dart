@@ -5,6 +5,8 @@ import 'package:pac20242/presetation/widgets/alunoCard.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 
 class TurmasPage extends StatefulWidget {
+  const TurmasPage({super.key});
+
   @override
   _TurmasPageState createState() => _TurmasPageState();
 }
@@ -69,7 +71,7 @@ class _TurmasPageState extends State<TurmasPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              StatusCard(
+              const StatusCard(
                 userName: 'Francisco Costa',
                 avatarUrl: 'https://example.com/avatar.jpg',
                 status: 'Aluno',
@@ -111,7 +113,7 @@ class _TurmasPageState extends State<TurmasPage> {
             left: isSideMenuOpen ? 0 : -250,
             top: 0,
             bottom: 0,
-            child: SideMenu(
+            child: const SideMenu(
               userName: 'Francisco Costa',
               avatarUrl: 'https://example.com/avatar.jpg',
             ),

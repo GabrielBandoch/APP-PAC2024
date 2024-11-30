@@ -23,18 +23,18 @@ class ReceiptCard extends StatelessWidget {
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: BorderSide(
-                color: const Color(0xFF1577EA), width: 2),
+            side: const BorderSide(
+                color: Color(0xFF1577EA), width: 2),
           ),
-          title: Center(
-            child: const Text(
+          title: const Center(
+            child: Text(
               'Detalhes do Recibo',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ),
           content: SingleChildScrollView(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 400), 
+              constraints: const BoxConstraints(maxWidth: 400), 
               child: ListBody(
                 children: [
                   Column(

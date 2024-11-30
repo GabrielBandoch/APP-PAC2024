@@ -39,7 +39,7 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  children: [
+                  children: const [
                     ReceiptCard(
                       userName: 'Gabriel B.',
                       avatarUrl:

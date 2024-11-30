@@ -8,7 +8,7 @@ class RedirectScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -18,16 +18,16 @@ class RedirectScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF1577EA),
+                      color: Color(0xFF1577EA),
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     'Você está sendo redirecionado para o site gov.br',
                     style: TextStyle(
                       fontSize: 16,
-                      color: const Color(0xFF1577EA),
+                      color: Color(0xFF1577EA),
                     ),
                     textAlign: TextAlign.center,
                   ),

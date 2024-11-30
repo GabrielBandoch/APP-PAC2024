@@ -58,11 +58,11 @@ class _PaymentScreen extends State<PaymentScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              Expanded(
+              const Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                       StatusCard(
                         userName: "Gabriel",
                         avatarUrl: "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
@@ -81,7 +81,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                         status: "Atrasado",
                         date: "03/01/2024",
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

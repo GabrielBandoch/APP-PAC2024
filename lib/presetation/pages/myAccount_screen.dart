@@ -77,6 +77,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _deleteAccount() async {
+    // Armazena o contexto principal (fora do diálogo)
+    final mainContext = context;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -90,13 +93,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             TextButton(
               onPressed: () async {
-                Navigator.pop(
-                    context); // Fecha o diálogo antes de continuar com as operações
+                Navigator.pop(context); // Fecha o diálogo antes de continuar
 
                 try {
                   // Acesse o Provider antes de qualquer navegação
                   final userProvider =
-                      Provider.of<UserProvider>(context, listen: false);
+                      Provider.of<UserProvider>(mainContext, listen: false);
                   String userId = userProvider.user!.uid;
                   String userRole = userProvider.userRole ?? 'aluno';
 
@@ -106,20 +108,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Excluir a conta do Firebase Authentication
                   await FirebaseAuth.instance.signOut();
 
-                  // Aguardar a conclusão da exclusão antes de navegar
-                  await Future.delayed(Duration(
-                      seconds:
-                          1)); // Atraso opcional para garantir que o estado foi atualizado
+                  // Usa o contexto principal (fora do diálogo) para navegar
+                  if (mainContext.mounted) {
+                    Navigator.pushReplacementNamed(mainContext, '/login');
+                  }
 
-                  // Redirecionar para a página de login
-                  Navigator.pushReplacementNamed(context, '/login');
-
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(mainContext).showSnackBar(
                     const SnackBar(
                         content: Text('Conta deletada com sucesso.')),
                   );
                 } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(mainContext).showSnackBar(
                     SnackBar(content: Text('Erro ao excluir conta: $e')),
                   );
                 }
