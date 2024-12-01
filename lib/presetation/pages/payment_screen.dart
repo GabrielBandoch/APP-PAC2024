@@ -1,35 +1,130 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
-import 'package:pac20242/presetation/widgets/navigationBarReduced.dart'; 
+import 'package:pac20242/presetation/widgets/navigationBarReduced.dart';
 import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 import 'package:pac20242/presetation/widgets/statusCard.dart';
+import 'package:provider/provider.dart';
+import 'package:pac20242/Provider/userProvider.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
+
   @override
-  _PaymentScreen createState() => _PaymentScreen();
+  _PaymentScreenState createState() => _PaymentScreenState();
 }
 
-class _PaymentScreen extends State<PaymentScreen> {
+class _PaymentScreenState extends State<PaymentScreen> {
   int _selectedIndex = 2;
   bool isSideMenuOpen = false;
-  final String userName = "Gabriel";
-  final String avatarUrl = ""; 
-  late String userRole; 
+  List<Map<String, dynamic>> payments = [];
+  List<String> allStudents = [];
+  String? selectedStudent;
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _valueController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    userRole = "aluno";
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.initializeUser(FirebaseAuth.instance.currentUser!);
+    userProvider.addListener(_fetchPayments);
+    _fetchAllStudents();
   }
 
+  Future<void> _fetchAllStudents() async {
+    try {
+      QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection('aluno').get();
+      List<String> alunos =
+          snapshot.docs.map((doc) => doc['nome'] as String).toList();
+
+      setState(() {
+        allStudents = alunos;
+      });
+    } catch (e) {
+      debugPrint('Erro ao buscar alunos: $e');
+    }
+  }
+
+  // Fetches payments based on user role (student or condutor)
+  Future<void> _fetchPayments() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userRole = userProvider.userRole;
+    final userId = userProvider.uid;
+
+    if (userRole == null || userId == null) return;
+
+    try {
+      QuerySnapshot snapshot;
+
+      if (userRole == "aluno") {
+        // A consulta está filtrando por aluno corretamente
+        snapshot = await FirebaseFirestore.instance
+            .collection('pagamentos')
+            .where('aluno', isEqualTo: userProvider.user?.displayName)
+            .get();
+      } else {
+        // Condutor pode ver pagamentos com base no seu ID
+        snapshot = await FirebaseFirestore.instance
+            .collection('pagamentos')
+            .where('condutorId', isEqualTo: userId)
+            .get();
+      }
+
+      setState(() {
+        payments = snapshot.docs
+            .map((doc) => doc.data() as Map<String, dynamic>)
+            .toList();
+      });
+    } catch (e) {
+      debugPrint('Erro ao buscar pagamentos: $e');
+    }
+  }
+
+  Future<void> _createPayment() async {
+    if (selectedStudent == null ||
+        _dateController.text.isEmpty ||
+        _valueController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text("Selecione um aluno, insira a data e o valor do pagamento."),
+        ),
+      );
+      return;
+    }
+
+    try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      await FirebaseFirestore.instance.collection('pagamentos').add({
+        'aluno': selectedStudent,
+        'status': 'Pendente',
+        'data': _dateController.text.trim(),
+        'valor': double.tryParse(_valueController.text.trim()) ?? 0.0,
+        'condutorId': userProvider.uid,
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Pagamento criado com sucesso!")),
+      );
+      _fetchPayments();
+    } catch (e) {
+      debugPrint("Erro ao criar pagamento: $e");
+    }
+  }
+
+  // Handles bottom navigation tab selection
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  // Toggles the side menu visibility
   void toggleSideMenu() {
     setState(() {
       isSideMenuOpen = !isSideMenuOpen;
@@ -38,16 +133,20 @@ class _PaymentScreen extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final userRole = userProvider.userRole;
+    final userName = userProvider.user?.displayName ?? "Usuário";
+
     return Scaffold(
       body: Stack(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 55), 
+              const SizedBox(height: 55),
               UserGreeting(
                 userName: userName,
-                avatarUrl: avatarUrl,
+                avatarUrl: '',
                 onAvatarTap: toggleSideMenu,
               ),
               const SizedBox(height: 12),
@@ -55,39 +154,51 @@ class _PaymentScreen extends State<PaymentScreen> {
                 child: Text(
                   'Pagamentos',
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 11, 34, 18),
                   ),
                 ),
               ),
               const SizedBox(height: 30),
-              const Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20),
-                      StatusCard(
-                        userName: "Gabriel",
-                        avatarUrl: "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
-                        status: "Pago",
-                        date: "01/01/2024",
+              if (userRole == "condutor")
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: ElevatedButton(
+                    onPressed: () => _showCreatePaymentModal(context),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      StatusCard(
-                        userName: "Gabriel",
-                        avatarUrl: "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
-                        status: "Pendente",
-                        date: "02/01/2024",
-                      ),
-                      StatusCard(
-                        userName: "Gabriel",
-                        avatarUrl: "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
-                        status: "Atrasado",
-                        date: "03/01/2024",
-                      ),
-                      SizedBox(height: 20),
-                    ],
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                    child: const Text(
+                      "Criar Pagamento",
+                      style: TextStyle(fontSize: 16, color: Colors.blue),
+                    ),
                   ),
+                ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: payments.length,
+                  itemBuilder: (context, index) {
+                    final payment = payments[index];
+                    final status = payment['status'] ?? 'Pendente';
+                    final paymentDate = payment['data'] ?? '';
+                    final value = payment['valor']?.toDouble() ?? 0.0;
+
+                    return StatusCard(
+                      userName: payment['aluno'] ?? 'Aluno Desconhecido',
+                      avatarUrl: '',
+                      status: status,
+                      date: paymentDate,
+                      value: value,
+                    );
+                  },
                 ),
               ),
             ],
@@ -108,7 +219,7 @@ class _PaymentScreen extends State<PaymentScreen> {
             bottom: 0,
             child: SideMenu(
               userName: userName,
-              avatarUrl: avatarUrl,
+              avatarUrl: '',
             ),
           ),
         ],
@@ -125,34 +236,73 @@ class _PaymentScreen extends State<PaymentScreen> {
     );
   }
 
-  Widget buildIconButton(String label, IconData icon) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFF1577EA), width: 2),
-            borderRadius: BorderRadius.circular(30),
+  // Displays the modal to create a new payment
+  void _showCreatePaymentModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Criar Pagamento",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _searchController,
+                decoration: const InputDecoration(
+                  labelText: "Buscar Aluno",
+                  labelStyle: TextStyle(fontSize: 16),
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    selectedStudent = allStudents.firstWhere(
+                        (student) =>
+                            student.toLowerCase().contains(value.toLowerCase()),
+                        orElse: () => '');
+                  });
+                },
+              ),
+              if (selectedStudent != null && selectedStudent!.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text("Aluno Selecionado: $selectedStudent",
+                      style: TextStyle(fontSize: 16)),
+                ),
+              TextField(
+                controller: _dateController,
+                decoration: const InputDecoration(
+                  labelText: "Data do Pagamento (DD/MM/YYYY)",
+                  labelStyle: TextStyle(fontSize: 16),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              TextField(
+                controller: _valueController,
+                decoration: const InputDecoration(
+                  labelText: "Valor",
+                  labelStyle: TextStyle(fontSize: 16),
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+            ],
           ),
-          child: CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.white,
-            child: Icon(
-              icon,
-              size: 30,
-              color: Colors.black,
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Cancelar"),
+              onPressed: () => Navigator.of(context).pop(),
             ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-          ),
-        ),
-      ],
+            TextButton(
+              child: const Text("Criar"),
+              onPressed: () {
+                _createPayment();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

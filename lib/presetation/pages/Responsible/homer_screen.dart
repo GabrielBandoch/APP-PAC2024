@@ -4,6 +4,21 @@ import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 import 'package:pac20242/presetation/widgets/statusCard.dart';
 
+// Exemplo de como os dados do pagamento podem ser estruturados
+class Payment {
+  final String aluno;
+  final String status;
+  final String date;
+  final double value;
+
+  Payment({
+    required this.aluno,
+    required this.status,
+    required this.date,
+    required this.value,
+  });
+}
+
 class HomeScreenResponsavel extends StatefulWidget {
   const HomeScreenResponsavel({super.key});
 
@@ -17,6 +32,9 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
   final String userName = "Gabriel";
   final String avatarUrl = "";
 
+  // Lista fictícia de pagamentos, como exemplo
+  List<Payment> payments = [];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -26,6 +44,40 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
   void toggleSideMenu() {
     setState(() {
       isSideMenuOpen = !isSideMenuOpen;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Carregar pagamentos fictícios
+    fetchPayments();
+  }
+
+  // Simulando a busca de pagamentos
+  void fetchPayments() {
+    // Adicionando pagamentos fictícios
+    setState(() {
+      payments = [
+        Payment(
+          aluno: "Gabriel",
+          status: "Pago",
+          date: "01/01/2024",
+          value: 100.00,
+        ),
+        Payment(
+          aluno: "Gabriel",
+          status: "Pendente",
+          date: "02/01/2024",
+          value: 200.00,
+        ),
+        Payment(
+          aluno: "Gabriel",
+          status: "Atrasado",
+          date: "03/01/2024",
+          value: 150.00,
+        ),
+      ];
     });
   }
 
@@ -71,34 +123,20 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
                 ],
               ),
               const SizedBox(height: 30),
-              const Expanded(
+              // Exibir os pagamentos dinamicamente
+              Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: [
-                      SizedBox(height: 20),
-                      StatusCard(
-                        userName: "Gabriel",
-                        avatarUrl:
-                            "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
-                        status: "Pago",
-                        date: "01/01/2024",
-                      ),
-                      StatusCard(
-                        userName: "Gabriel",
-                        avatarUrl:
-                            "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
-                        status: "Pendente",
-                        date: "02/01/2024",
-                      ),
-                      StatusCard(
-                        userName: "Gabriel",
-                        avatarUrl:
-                            "https://www.drivetest.de/wp-content/uploads/2019/08/drivetest-avatar-m.png",
-                        status: "Atrasado",
-                        date: "03/01/2024",
-                      ),
-                      SizedBox(height: 20),
-                    ],
+                    children: payments.map((payment) {
+                      // Renderiza o StatusCard para cada pagamento
+                      return StatusCard(
+                        userName: payment.aluno,
+                        avatarUrl: '',
+                        status: payment.status,
+                        date: payment.date,
+                        value: payment.value, // Passando o valor corretamente
+                      );
+                    }).toList(),
                   ),
                 ),
               ),

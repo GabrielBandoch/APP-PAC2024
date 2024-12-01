@@ -73,7 +73,9 @@ class MyApp extends StatelessWidget {
         '/reschedulePayment': (context) => SchedulePaymentPage(),
         '/turmas': (context) => const TurmasPage(),
         '/race': (context) => const StartRace(),
-        '/editClass': (context) => const EditClassPage(),
+        '/editClass': (context) => const EditClassPage(
+              classId: '',
+            ),
         '/createClass': (context) => const CreateClassScreen(),
       },
     );

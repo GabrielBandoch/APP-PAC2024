@@ -9,6 +9,9 @@ class UserProvider extends ChangeNotifier {
   User? get user => _user;
   String? get userRole => _userRole;
 
+  //get uid => null;
+  String? get uid => _user?.uid;
+
   Future<void> initializeUser(User firebaseUser) async {
     _user = firebaseUser;
     bool userFound = false;

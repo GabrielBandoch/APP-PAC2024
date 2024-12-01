@@ -52,7 +52,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     setState(() {
       isLoading = false;
-      // Inicializando os controladores com os dados existentes
       nomeController.text = userData['nome'] ?? '';
       telefoneController.text = userData['telefone'] ?? '';
       emailController.text = userData['email'] ?? '';
@@ -133,7 +132,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _saveChanges() async {
     try {
-      // Atualiza o mapa userData com os valores dos campos
       userData['nome'] = nomeController.text;
       userData['telefone'] = telefoneController.text;
       userData['email'] = emailController.text;
@@ -149,7 +147,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         await _firestoreServices.updateCondutor(userId, userData);
       }
 
-      // Recarrega os dados para refletir as alterações
       _loadUserData();
 
       ScaffoldMessenger.of(context).showSnackBar(
