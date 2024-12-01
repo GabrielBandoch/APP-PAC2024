@@ -321,6 +321,25 @@ class FireStoreServices {
       print('Erro ao deletar turma: $e');
     }
   }
+
+  // Função para buscar alunos com base em um termo de pesquisa
+  Future<List<Map<String, dynamic>>> searchAlunos(String searchTerm) async {
+    try {
+      // Buscar alunos que tenham o nome contendo o termo de pesquisa
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('aluno')
+          .where('nome', isGreaterThanOrEqualTo: searchTerm)
+          .where('nome', isLessThanOrEqualTo: searchTerm + '\uf8ff') // Busca por prefixo
+          .get();
+
+      // Mapear os resultados para uma lista de mapas
+      return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    } catch (e) {
+      print('Erro ao buscar alunos: $e');
+      return [];
+    }
+  }
+
 }
 
 
