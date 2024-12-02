@@ -6,6 +6,8 @@ import 'package:pac20242/presetation/widgets/sideMenu.dart';
 import 'package:pac20242/utils/firebase_services.dart';
 import 'package:provider/provider.dart';
 import 'package:pac20242/Provider/userProvider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pac20242/utils/firebase_auth.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -36,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _loadUserData();
+    _getUserData();
   }
 
   void _loadUserData() async {
@@ -159,24 +162,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  String userName = "Carregando...";
+
+  Future<void> _getUserData() async {
+  final String? userId = await AuthService.getCurrentUserId();  // Pegando o ID do usuário logado
+  if (userId != null) {
+    try {
+      // Buscando dados do usuário no Firestore
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('aluno')  // Coleção de usuários no Firestore
+          .doc(userId)  // Usando o ID do usuário como documento
+          .get();
+
+      // Verifica se o widget ainda está montado antes de chamar setState
+      if (mounted) {
+        if (userDoc.exists) {
+          String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+          userName = fullName.split(' ').first;  // Pega o primeiro nome
+        } else {
+          userName = "Usuário não encontrado";
+        }
+        setState(() {});  // Atualiza o estado
+      }
+    } catch (e) {
+      print('Erro ao buscar usuário: $e');
+      if (mounted) {
+        userName = "Erro ao carregar dados";
+        setState(() {});  // Atualiza o estado com o erro
+      }
+    }
+  } else {
+    if (mounted) {
+      userName = "Não logado";  // Caso o usuário não esteja logado
+      setState(() {});  // Atualiza o estado
+    }
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(
       builder: (context, userProvider, child) {
-        final userName =
-            userProvider.user?.displayName ?? 'Nome não disponível';
         final userEmail = userProvider.user?.email ?? 'Email não disponível';
 
         return Scaffold(
           appBar: AppBar(
             title: const Text('Perfil'),
             backgroundColor: Colors.blue,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: toggleSideMenu,
-              ),
-            ],
+            
           ),
           body: Stack(
             children: [

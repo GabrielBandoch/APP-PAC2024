@@ -4,6 +4,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FireStoreServices {
   get instance => null;
 
+  Future<Map<String, dynamic>> obterDocumento(String colecao, String documentId) async {
+  try {
+    DocumentSnapshot documento = await FirebaseFirestore.instance
+        .collection(colecao)
+        .doc(documentId)
+        .get();
+
+    if (documento.exists) {
+      return documento.data() as Map<String, dynamic>? ?? {}; // Retorna o mapa ou um mapa vazio
+    } else {
+      print("Documento não encontrado!");
+      return {};
+    }
+  } catch (e) {
+    print('Erro ao obter documento: $e');
+    return {};
+  }
+  }
+
+
   // Adicionar Aluno
   Future<void> addAluno(String nomeE, String telefoneE, String numeroCasa,
       String nomeRua, String cidade, String estado, String cep) async {

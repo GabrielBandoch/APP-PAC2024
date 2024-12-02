@@ -106,4 +106,46 @@ class AuthService {
       );
     }
   }
+
+  static Future<String?> getCurrentUserId() async {
+  // Obtenha o usuário atualmente logado
+  User? user = FirebaseAuth.instance.currentUser;
+
+  if (user != null) {
+    // Resgatar o UID do usuário
+    String uid = user.uid;
+    
+    print('ID do Usuário Logado: $uid');
+    return uid;
+  } else {
+    print('Nenhum usuário está logado.');
+  }
 }
+
+
+  Future<void> updateUserName(String newDisplayName) async {
+    try {
+      // Obtém o usuário autenticado atualmente
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Atualiza o nome completo do usuário
+        await user.updateProfile(displayName: newDisplayName);
+
+        // Após a atualização, é recomendável recarregar as informações do usuário
+        await user.reload();
+        user = FirebaseAuth.instance.currentUser;
+
+        // Verifica se a atualização foi bem-sucedida
+        print("Nome de usuário atualizado para: ${user?.displayName}");
+      } else {
+        print("Nenhum usuário está autenticado.");
+      }
+    } catch (e) {
+      print("Erro ao atualizar o nome de usuário: $e");
+    }
+  }
+
+
+}
+

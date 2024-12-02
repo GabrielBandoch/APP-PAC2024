@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pac20242/Provider/userProvider.dart';
 
 class SideMenu extends StatelessWidget {
   final String userName;
@@ -50,7 +52,16 @@ class SideMenu extends StatelessWidget {
                   title: const Text('Início',
                       style: TextStyle(color: Colors.black)),
                   onTap: () {
-                    Navigator.pushNamed(context, '/login');
+                    final userProvider = Provider.of<UserProvider>(context, listen: false);
+                    String userType = userProvider.userRole ?? 'desconhecido';
+                    if(userType == "aluno"){
+                      Navigator.pushNamed(context, '/home_resp');
+                    } else if(userType == "condutor"){
+                      Navigator.pushNamed(context, '/home_driver');
+                    } else {
+                      print("Erro: Tipo Desconhecido");
+                    }
+                    
                   },
                 ),
                 ListTile(

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/custom_progress_bar.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,6 +17,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,]);
 
     _controller = AnimationController(
       vsync: this,

@@ -7,6 +7,7 @@ class ReceiptPreviewScreen extends StatefulWidget {
   final String? userCPF;
   final String? paymentStatus;
   final String? receiptAmount;
+  final String? uid;
 
   const ReceiptPreviewScreen({
     Key? key,
@@ -14,6 +15,7 @@ class ReceiptPreviewScreen extends StatefulWidget {
     this.userCPF,
     this.paymentStatus,
     this.receiptAmount,
+    this.uid
   }) : super(key: key);
 
   @override
@@ -52,6 +54,7 @@ class _ReceiptPreviewScreenState extends State<ReceiptPreviewScreen> {
               status: widget.paymentStatus ?? 'N/A',
               date: '01/01/2024',
               amount: 'R\$ ${widget.receiptAmount ?? '0,00'}',
+              uid: '',
             ),
             const SizedBox(height: 16),
             _buildInfoRow('Responsável:', widget.userName ?? 'N/A'),

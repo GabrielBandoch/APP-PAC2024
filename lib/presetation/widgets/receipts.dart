@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'dart:ui';
+import 'dart:math';
 
 class ReceiptCard extends StatelessWidget {
   final String userName;
@@ -6,17 +12,45 @@ class ReceiptCard extends StatelessWidget {
   final String status;
   final String date;
   final String amount;
+  final String uid;
 
   const ReceiptCard({
-    Key? key,
+    super.key,
     required this.userName,
     required this.avatarUrl,
     required this.status,
     required this.date,
     required this.amount,
-  }) : super(key: key);
+    required this.uid
+  });
 
   void _showReceiptDetails(BuildContext context) {
+    final GlobalKey _captureKey =  GlobalKey();
+
+    Future<void> _generatePdf() async {
+    try {
+      RenderRepaintBoundary boundary =
+          _captureKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final image = await boundary.toImage(pixelRatio: 2.0);
+      final byteData = await image.toByteData(format: ImageByteFormat.png);
+      final pngBytes = byteData!.buffer.asUint8List();
+      final pdf = pw.Document();
+      final imageMemory = pw.MemoryImage(pngBytes);
+      pdf.addPage(pw.Page(
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Image(imageMemory),
+          );
+        },
+      ));
+
+      // Visualiza ou salva o PDF
+      await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => pdf.save());
+    } catch (e) {
+      print('Erro ao gerar o PDF: $e');
+    }
+  }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -37,54 +71,56 @@ class ReceiptCard extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 400), 
               child: ListBody(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Recibo N° 12345',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Valor: $amount',
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Recebi(emos) de $userName a quantia de $amount correspondente a transporte escolar. Para clareza firmo(amos) o presente.',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Assinatura: Gabriel F.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const Text(
-                    'Nome: Gabriel F A Bandoch',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const Text(
-                    'CPF/RG: 111.111.111-11',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const Text(
-                    'Endereço: R° São João',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  RepaintBoundary(
+                    key: _captureKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Recibo N° $uid',
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Valor: $amount',
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          'Recebi(emos) de $userName a quantia de $amount correspondente a transporte escolar. Para clareza firmo(amos) o presente.',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
+                          'Nome: Gabriel F A Bandoch',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const Text(
+                          'CPF/RG: 111.111.111-11',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const Text(
+                          'Endereço: R° São João',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Fechar'),
+              onPressed: () => _generatePdf(),
+              child: const Text('Imprimir'),
             ),
           ],
         );

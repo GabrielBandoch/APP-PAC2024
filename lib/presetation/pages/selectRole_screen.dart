@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pac20242/utils/firebase_services.dart';
+import 'package:pac20242/utils/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   const SelectRoleScreen({super.key});
@@ -9,7 +11,9 @@ class SelectRoleScreen extends StatefulWidget {
 }
 
 class _SelectRoleScreenState extends State<SelectRoleScreen> {
+  
   final FireStoreServices _storeServices = FireStoreServices();
+  final AuthService _authService = AuthService();
   bool isCondutorSelected = false;
   bool isAlunoSelected = false;
   String errorMessage = '';
@@ -108,6 +112,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
           alunoStateController.text,
           alunoZipCodeController.text);
 
+      await _authService.updateUserName(alunoNameController.text);
+
       // Limpar campos
       alunoNameController.clear();
       alunoPhoneController.clear();
@@ -121,7 +127,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       errorMessage = '';
     });
 
-    Navigator.pushNamed(context, '/login');
+    Navigator.pushNamed(context, '/signature');
   }
 
   @override
@@ -244,6 +250,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                   ),
                 ),
               ),
+              
             ] else if (isAlunoSelected) ...[
               TextField(
                 controller: alunoNameController,

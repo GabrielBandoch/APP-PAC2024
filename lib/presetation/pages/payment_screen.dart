@@ -50,6 +50,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
+  
   // Fetches payments based on user role (student or condutor)
   Future<void> _fetchPayments() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -137,6 +138,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final userRole = userProvider.userRole;
     final userName = userProvider.user?.displayName ?? "Usuário";
 
+    print(userName);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -145,7 +148,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               const SizedBox(height: 55),
               UserGreeting(
-                userName: userName,
+                userName: userName.split(' ').first,
                 avatarUrl: '',
                 onAvatarTap: toggleSideMenu,
               ),
@@ -218,7 +221,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             top: 0,
             bottom: 0,
             child: SideMenu(
-              userName: userName,
+              userName: userName.split(' ').first,
               avatarUrl: '',
             ),
           ),
