@@ -12,7 +12,7 @@ class _StudentLocationScreenState extends State<StudentLocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Localização do Aluno'), // Você pode adicionar um título aqui
+        title: const Text('Localização do Aluno'), // Opcional: adicionar título
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

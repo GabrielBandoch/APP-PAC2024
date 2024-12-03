@@ -174,18 +174,16 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
                 ],
               ),
               const SizedBox(height: 30),
-              // Exibir os pagamentos dinamicamente
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: payments.map((payment) {
-                      // Renderiza o StatusCard para cada pagamento
                       return StatusCard(
                         userName: payment.aluno,
                         avatarUrl: '',
                         status: payment.status,
                         date: payment.date,
-                        value: payment.value, // Passando o valor corretamente
+                        value: payment.value,
                       );
                     }).toList(),
                   ),

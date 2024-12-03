@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UserGreeting extends StatelessWidget {
+class UserGreeting extends StatefulWidget {
   final String userName;
   final String avatarUrl;
   final VoidCallback onAvatarTap;
@@ -11,6 +11,20 @@ class UserGreeting extends StatelessWidget {
     required this.avatarUrl,
     required this.onAvatarTap,
   });
+
+  @override
+  _UserGreetingState createState() => _UserGreetingState();
+}
+
+class _UserGreetingState extends State<UserGreeting> {
+  bool _hasNewNotifications = false; // Estado para indicar novas notificações
+
+  // Função para simular a atualização de notificações
+  void _toggleNotifications() {
+    setState(() {
+      _hasNewNotifications = !_hasNewNotifications; // Alterna o estado das notificações
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +45,15 @@ class UserGreeting extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: onAvatarTap,
+              onTap: widget.onAvatarTap, // Usa o método onAvatarTap do widget pai
               child: CircleAvatar(
-                backgroundImage: NetworkImage(avatarUrl),
+                backgroundImage: NetworkImage(widget.avatarUrl),
                 radius: 24,
               ),
             ),
           ),
           Text(
-            'Olá, $userName',
+            'Olá, ${widget.userName}', // Acessa as propriedades do widget
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -50,10 +64,14 @@ class UserGreeting extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
+                // Atualiza o estado das notificações quando o ícone for tocado
+                _toggleNotifications();
                 Navigator.pushNamed(context, '/notification');
               },
-              child: const Icon(
-                Icons.notifications,
+              child: Icon(
+                _hasNewNotifications
+                    ? Icons.notifications_active // Ícone de notificação ativa
+                    : Icons.notifications, // Ícone de notificação normal
                 color: Colors.black,
                 size: 28,
               ),

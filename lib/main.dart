@@ -80,6 +80,7 @@ class MyApp extends StatelessWidget {
             ),
         '/createClass': (context) => const CreateClassScreen(),
         '/signature': (context) => SignatureScreen(),
+        '/corridaAluno': (context) => StudentLocationScreen(),
       },
     );
   }

@@ -21,7 +21,7 @@ class NavigationBarReduced extends StatelessWidget {
             Navigator.pushNamed(context, '/home_resp');
             break;
           case 2:
-            Navigator.pushNamed(context, '/home_resp');
+            Navigator.pushNamed(context, '/profile');
             break;
         }
       },
