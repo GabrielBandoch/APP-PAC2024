@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
 import 'package:pac20242/utils/firebase_services.dart';
+import 'package:pac20242/utils/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateClassScreen extends StatefulWidget {
   const CreateClassScreen({super.key});
@@ -16,9 +18,64 @@ class CreateClassScreen extends StatefulWidget {
 class _CreateClassScreenState extends State<CreateClassScreen> {
   int _selectedIndex = 2;
   bool isSideMenuOpen = false;
-  final String userName = "Gabriel";
+  String userName = "Carregando...";
   final String avatarUrl = "";
   final FireStoreServices firestoreServices = FireStoreServices();
+
+    @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
+
+
+
+ Future<void> _getUserData() async {
+  final String? userId = await AuthService.getCurrentUserId();  // Pegando o ID do usuário logado
+  if (userId != null) {
+    try {
+      // Buscando dados do usuário no Firestore
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('condutor')  // Coleção de usuários no Firestore
+          .doc(userId)  // Usando o ID do usuário como documento
+          .get();
+
+
+      // Verifica se o widget ainda está montado antes de chamar setState
+      if (mounted) {
+        if (userDoc.exists) {
+          String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+          userName = fullName.split(' ').first;  // Pega o primeiro nome
+        } else {
+          DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('aluno')  // Coleção de usuários no Firestore
+            .doc(userId)  // Usando o ID do usuário como documento
+            .get();
+
+            if(userDoc.exists){
+              String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+              userName = fullName.split(' ').first;  // Pega o primeiro nome
+            } else{
+              print("NÂO TEM NADA AI");
+            }
+        }
+        setState(() {});  // Atualiza o estado
+      }
+    } catch (e) {
+      print('Erro ao buscar usuário: $e');
+      if (mounted) {
+        userName = "Erro ao carregar dados";
+        setState(() {});  // Atualiza o estado com o erro
+      }
+    }
+  } else {
+    if (mounted) {
+      userName = "Não logado";  // Caso o usuário não esteja logado
+      setState(() {});  // Atualiza o estado
+    }
+  }
+}
+
 
   // Função que busca as turmas usando o FirestoreService
   Future<List<String>> _fetchClasses() async {

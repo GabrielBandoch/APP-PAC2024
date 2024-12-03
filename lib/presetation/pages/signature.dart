@@ -76,7 +76,7 @@ class _SignatureScreenState extends State<SignatureScreen> {
                 onPressed: () async {
                   if (_controller.isNotEmpty) {
                     final signature = await _controller.toPngBytes();
-                    print(signature);
+                    
                     if (signature != null) {
                       // Faça o que desejar com a assinatura, como salvar ou inserir em um documento
                       Navigator.pushNamed(context, '/login');

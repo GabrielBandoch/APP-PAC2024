@@ -103,8 +103,33 @@ class UserHeader extends StatelessWidget {
               ),
             ),
           ),
+                            const SizedBox(height: 32),
+                  SizedBox(
+                    width: 287,
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        //_login();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1577EA),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'OpenSans',
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
           Text(
-            'Olá, $userName',
+            'Olá, Condutor',
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

@@ -31,16 +31,17 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
   bool isSideMenuOpen = false;
   String userName = "Carregando...";
   final String avatarUrl = "";
-
+  
   Future<void> _getUserData() async {
   final String? userId = await AuthService.getCurrentUserId();  // Pegando o ID do usuário logado
   if (userId != null) {
     try {
       // Buscando dados do usuário no Firestore
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('aluno')  // Coleção de usuários no Firestore
+          .collection('condutor')  // Coleção de usuários no Firestore
           .doc(userId)  // Usando o ID do usuário como documento
           .get();
+
 
       // Verifica se o widget ainda está montado antes de chamar setState
       if (mounted) {
@@ -48,7 +49,17 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
           String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
           userName = fullName.split(' ').first;  // Pega o primeiro nome
         } else {
-          userName = "Usuário não encontrado";
+          DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('aluno')  // Coleção de usuários no Firestore
+            .doc(userId)  // Usando o ID do usuário como documento
+            .get();
+
+            if(userDoc.exists){
+              String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+              userName = fullName.split(' ').first;  // Pega o primeiro nome
+            } else{
+              print("NÂO TEM NADA AI");
+            }
         }
         setState(() {});  // Atualiza o estado
       }
@@ -66,8 +77,6 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
     }
   }
 }
-
-
   Future<void> _fetchReceipts() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final userRole = userProvider.userRole;

@@ -83,6 +83,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       await _storeServices.addCondutor(
           condutorNameController.text, condutorPhoneController.text);
 
+        await _authService.updateUserName(condutorNameController.text);  
+
       // Limpar campos
       condutorNameController.clear();
       condutorPhoneController.clear();

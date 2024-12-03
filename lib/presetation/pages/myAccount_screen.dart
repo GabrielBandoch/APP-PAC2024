@@ -170,9 +170,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       // Buscando dados do usuário no Firestore
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('aluno')  // Coleção de usuários no Firestore
+          .collection('condutor')  // Coleção de usuários no Firestore
           .doc(userId)  // Usando o ID do usuário como documento
           .get();
+
 
       // Verifica se o widget ainda está montado antes de chamar setState
       if (mounted) {
@@ -180,7 +181,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
           userName = fullName.split(' ').first;  // Pega o primeiro nome
         } else {
-          userName = "Usuário não encontrado";
+          DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('aluno')  // Coleção de usuários no Firestore
+            .doc(userId)  // Usando o ID do usuário como documento
+            .get();
+
+            if(userDoc.exists){
+              String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+              userName = fullName.split(' ').first;  // Pega o primeiro nome
+            } else{
+              print("NÂO TEM NADA AI");
+            }
         }
         setState(() {});  // Atualiza o estado
       }
@@ -204,6 +215,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Consumer<UserProvider>(
       builder: (context, userProvider, child) {
         final userEmail = userProvider.user?.email ?? 'Email não disponível';
+        
+
 
         return Scaffold(
           appBar: AppBar(
@@ -373,15 +386,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   left: 0,
                   child: SideMenu(
                     userName: userName, // Passe o nome do usuário
-                    avatarUrl: userProvider.user?.photoURL ??
-                        'https://via.placeholder.com/150', // Passe a URL do avatar
+                    avatarUrl: '', // Passe a URL do avatar
                   ),
                 ),
             ],
           ),
           bottomNavigationBar: NavigationBarComplete(
             selectedIndex: _selectedIndex,
-            onTap: _onItemTapped, // Alterado de onItemTapped para onTap
+            onTap: _onItemTapped, 
           ),
         );
       },

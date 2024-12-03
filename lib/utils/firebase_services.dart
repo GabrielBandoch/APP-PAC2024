@@ -488,7 +488,21 @@ class FireStoreServices {
   }
 }
 
+  Future<void> addAssinatura(String Assinatura, String NomeCondutor) async {
+    try {
 
+        CollectionReference assinatura = FirebaseFirestore.instance.collection('assinatura');
+
+        await assinatura.doc().set({
+          'nome': NomeCondutor,
+          'assinatura': Assinatura,
+        });
+
+        print('Assinatura adicionada com sucesso');      
+    } catch (e) {
+      print('Erro ao adicionar assinatura: $e');
+    }
+  }
 
 
 // if (isSideMenuOpen)

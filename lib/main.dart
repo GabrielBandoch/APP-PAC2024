@@ -24,6 +24,7 @@ import 'package:pac20242/presetation/pages/Driver/locationClass.dart';
 import 'package:pac20242/presetation/pages/Driver/locationStudent.dart';
 import 'package:pac20242/presetation/pages/Driver/reschedule_payment.dart';
 import 'package:pac20242/presetation/pages/signature.dart';
+import 'package:pac20242/presetation/pages/Responsible/corrida.dart';
 
 // Firebase
 import 'package:firebase_core/firebase_core.dart';

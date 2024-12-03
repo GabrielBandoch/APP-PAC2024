@@ -41,15 +41,16 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
   String userName = "Carregando...";  
   String avatarUrl = "";
 
- Future<void> _getUserData() async {
+  Future<void> _getUserData() async {
   final String? userId = await AuthService.getCurrentUserId();  // Pegando o ID do usuário logado
   if (userId != null) {
     try {
       // Buscando dados do usuário no Firestore
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('aluno')  // Coleção de usuários no Firestore
+          .collection('condutor')  // Coleção de usuários no Firestore
           .doc(userId)  // Usando o ID do usuário como documento
           .get();
+
 
       // Verifica se o widget ainda está montado antes de chamar setState
       if (mounted) {
@@ -57,7 +58,17 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
           String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
           userName = fullName.split(' ').first;  // Pega o primeiro nome
         } else {
-          userName = "Usuário não encontrado";
+          DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('aluno')  // Coleção de usuários no Firestore
+            .doc(userId)  // Usando o ID do usuário como documento
+            .get();
+
+            if(userDoc.exists){
+              String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+              userName = fullName.split(' ').first;  // Pega o primeiro nome
+            } else{
+              print("NÂO TEM NADA AI");
+            }
         }
         setState(() {});  // Atualiza o estado
       }
@@ -157,7 +168,7 @@ class _HomeScreenState extends State<HomeScreenResponsavel> {
                     'Corrida',
                     Icons.location_on,
                     () {
-                      Navigator.pushNamed(context, '/corrida');
+                      Navigator.pushNamed(context, '/corridaAluno');
                     },
                   ),
                 ],

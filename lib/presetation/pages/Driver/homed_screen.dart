@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
 import 'package:pac20242/presetation/widgets/userGretting.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
+import 'package:pac20242/utils/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreenDriver extends StatefulWidget {
   const HomeScreenDriver({super.key});
@@ -12,7 +14,14 @@ class HomeScreenDriver extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreenDriver> {
   int _selectedIndex = 2;
   bool isSideMenuOpen = false;
-  final String userName = "Gabriel";
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
+
+  String userName = "Carregando...";
   final String avatarUrl = ""; 
 
   void _onItemTapped(int index) {
@@ -26,6 +35,42 @@ class _HomeScreenState extends State<HomeScreenDriver> {
       isSideMenuOpen = !isSideMenuOpen;
     });
   }
+
+
+  Future<void> _getUserData() async {
+  final String? userId = await AuthService.getCurrentUserId();  // Pegando o ID do usuário logado
+  if (userId != null) {
+    try {
+      // Buscando dados do usuário no Firestore
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('condutor')  // Coleção de usuários no Firestore
+          .doc(userId)  // Usando o ID do usuário como documento
+          .get();
+
+      // Verifica se o widget ainda está montado antes de chamar setState
+      if (mounted) {
+        if (userDoc.exists) {
+          String fullName = userDoc['nome'] ?? "Nome não encontrado";  // Pega o nome completo
+          userName = fullName.split(' ').first;  // Pega o primeiro nome
+        } else {
+          userName = "Usuário não encontrado";
+        }
+        setState(() {});  // Atualiza o estado
+      }
+    } catch (e) {
+      print('Erro ao buscar usuário: $e');
+      if (mounted) {
+        userName = "Erro ao carregar dados";
+        setState(() {});  // Atualiza o estado com o erro
+      }
+    }
+  } else {
+    if (mounted) {
+      userName = "Não logado";  // Caso o usuário não esteja logado
+      setState(() {});  // Atualiza o estado
+    }
+  }
+}
 
   @override
   Widget build(BuildContext context) {
