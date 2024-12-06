@@ -46,6 +46,8 @@ A interface desse aplicativo terá como intuito principal a simplicidade, tendo 
 ### Links Confluence e Jira:
 [![Jira](https://img.shields.io/badge/Jira-0052CC.svg?style=for-the-badge&logo=Jira&logoColor=white)](https://pac-quarto-semestre.atlassian.net/jira/software/projects/PB/boards/34?atlOrigin=eyJpIjoiODVhM2MyNTA3MGMzNDY4MThlYTc1NmNmNDU0MmU0YzkiLCJwIjoiaiJ9)
 [![Confluence](https://img.shields.io/badge/Confluence-172B4D.svg?style=for-the-badge&logo=Confluence&logoColor=white)](https://pac-quarto-semestre.atlassian.net/l/cp/bWQhD1fh)
+[![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)](https://www.canva.com/design/DAGX50bJoZ8/Nf-9LuNJ_nhOLeVHckdCNw/edit?utm_content=DAGX50bJoZ8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 
 ### Alunos:
 - Eric Gabriel Caetano
