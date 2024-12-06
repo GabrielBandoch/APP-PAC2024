@@ -48,7 +48,7 @@ A interface desse aplicativo terá como intuito principal a simplicidade, tendo 
 [![Confluence](https://img.shields.io/badge/Confluence-172B4D.svg?style=for-the-badge&logo=Confluence&logoColor=white)](https://pac-quarto-semestre.atlassian.net/l/cp/bWQhD1fh)
 [![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)](https://www.canva.com/design/DAGX50bJoZ8/Nf-9LuNJ_nhOLeVHckdCNw/edit?utm_content=DAGX50bJoZ8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)]([https://www.youtube.com/](https://youtube.com/shorts/4_RsUHTBUbg?feature=share
-))
+)
 Só clicar na badges para acessar os links
 
 ### Alunos:
