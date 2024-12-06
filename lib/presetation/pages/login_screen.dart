@@ -230,7 +230,7 @@ class _LoginScreen extends State<LoginScreen> {
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         _errorMessage,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.red,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,

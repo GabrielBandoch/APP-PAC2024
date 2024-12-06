@@ -199,7 +199,7 @@ class _CreateClassPageState extends State<CreateClassPage> {
                               borderRadius: BorderRadius.circular(30),
                               borderSide: const BorderSide(color: Colors.blue),
                             ),
-                            suffixIcon: Icon(
+                            suffixIcon: const Icon(
                               Icons.search,
                               color: Colors.blue,
                             ),
@@ -249,7 +249,7 @@ class _CreateClassPageState extends State<CreateClassPage> {
                           return Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.blue, width: 2),
+                              side: const BorderSide(color: Colors.blue, width: 2),
                             ),
                             margin: const EdgeInsets.only(bottom: 8),
                             child: ListTile(

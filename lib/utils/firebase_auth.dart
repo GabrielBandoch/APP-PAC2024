@@ -70,19 +70,19 @@ class AuthService {
         RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")
             .hasMatch(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Por favor, insira um e-mail válido.")));
+          const SnackBar(content: Text("Por favor, insira um e-mail válido.")));
       return;
     }
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(child: CircularProgressIndicator()),
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
     try {
       await _auth.sendPasswordResetEmail(email: email);
       Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("E-Mail de redefinição enviado com sucesso.")));
     } catch (e) {
       Navigator.of(context).pop();

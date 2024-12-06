@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pac20242/presetation/widgets/navigationBarComplete.dart';
+import 'package:pac20242/Provider/userProvider.dart';
+import 'package:pac20242/presetation/pages/Driver/locationStudent.dart';
 import 'package:pac20242/presetation/widgets/sideMenu.dart';
+import 'package:pac20242/utils/firebase_services.dart';
+import 'package:provider/provider.dart';
 
 class StartRace extends StatefulWidget {
   const StartRace({super.key});
@@ -12,7 +15,37 @@ class StartRace extends StatefulWidget {
 class _StartRace extends State<StartRace> {
   int _selectedIndex = 2;
   bool isSideMenuOpen = false;
-  String? _selectedClass = 'Turma A'; 
+  String? _selectedClass;
+  List<String> _classes = [];
+  final FireStoreServices firestoreServices = FireStoreServices();
+
+  // Função para buscar turmas do Firebase
+  Future<void> _fetchClasses() async {
+    try {
+      final motoristaId = Provider.of<UserProvider>(context, listen: false).uid;
+
+      if (motoristaId == null) {
+        print('Erro: motoristaId não encontrado');
+        return;
+      }
+
+      final fetchedClasses = await firestoreServices.fetchClasses(motoristaId);
+      setState(() {
+        _classes = fetchedClasses;
+        _selectedClass = _classes.isNotEmpty
+            ? _classes[0]
+            : null; // Seleciona a primeira turma por padrão
+      });
+    } catch (e) {
+      print('Erro ao carregar turmas: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchClasses(); // Chama a função para buscar turmas ao iniciar o widget
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -57,20 +90,19 @@ class _StartRace extends State<StartRace> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.blue), 
+                        border: Border.all(color: Colors.blue),
                       ),
                       child: DropdownButton<String>(
                         isExpanded: true,
                         value: _selectedClass,
                         hint: const Text("Selecionar a turma"),
-                        items: <String>['Turma A', 'Turma B', 'Turma C']
-                            .map((String value) {
+                        items: _classes.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
                               value,
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold, 
+                                fontWeight: FontWeight.bold,
                                 color: Colors.blue,
                               ),
                             ),
@@ -103,8 +135,9 @@ class _StartRace extends State<StartRace> {
                     ),
                     child: Center(
                       child: Text(
-                        _selectedClass ?? 'Turma A',
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        _selectedClass ?? 'Nenhuma turma selecionada',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
                   ),
@@ -119,7 +152,7 @@ class _StartRace extends State<StartRace> {
                       style: const TextStyle(color: Colors.black, fontSize: 16),
                       children: <TextSpan>[
                         TextSpan(
-                          text: _selectedClass ?? 'TURMA A?',
+                          text: _selectedClass ?? 'TURMA NÃO DEFINIDA?',
                           style: const TextStyle(
                               color: Colors.blue, fontWeight: FontWeight.bold),
                         ),
@@ -132,7 +165,7 @@ class _StartRace extends State<StartRace> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/locatinStudent');
+                          Navigator.pushNamed(context, '/locationStudent');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
@@ -143,8 +176,7 @@ class _StartRace extends State<StartRace> {
                         child: const Text(
                           'SIM',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -161,8 +193,7 @@ class _StartRace extends State<StartRace> {
                         child: const Text(
                           'NÃO',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -195,65 +226,6 @@ class _StartRace extends State<StartRace> {
       bottomNavigationBar: NavigationBarComplete(
         selectedIndex: _selectedIndex,
         onTap: _onItemTapped,
-      ),
-    );
-  }
-}
-class UserHeader extends StatelessWidget {
-  final String userName;
-  final String avatarUrl;
-  final VoidCallback onAvatarTap;
-
-  const UserHeader({
-    Key? key,
-    required this.userName,
-    required this.avatarUrl,
-    required this.onAvatarTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 340,
-      height: 64,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF1577EA),
-          width: 2,
-        ),
-        color: Colors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: onAvatarTap,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(avatarUrl),
-                radius: 24,
-              ),
-            ),
-          ),
-          Text(
-            'Olá, $userName',
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.notifications,
-              color: Colors.black,
-              size: 28,
-            ),
-          ),
-        ],
       ),
     );
   }

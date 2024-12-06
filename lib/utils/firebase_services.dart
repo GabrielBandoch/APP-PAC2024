@@ -390,7 +390,7 @@ class FireStoreServices {
           .collection('aluno')
           .where('nome', isGreaterThanOrEqualTo: searchTerm)
           .where('nome',
-              isLessThanOrEqualTo: searchTerm + '\uf8ff') // Busca por prefixo
+              isLessThanOrEqualTo: '$searchTerm\uf8ff') // Busca por prefixo
           .get();
 
       // Mapear os resultados para uma lista de mapas

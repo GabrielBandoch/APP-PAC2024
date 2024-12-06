@@ -18,7 +18,7 @@ class ConfirmCodeScreen extends StatelessWidget {
           children: [
             Text(
               'Um e-mail foi enviado para: $email',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
@@ -32,12 +32,12 @@ class ConfirmCodeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("Voltar"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 padding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 50),
               ),
+              child: const Text("Voltar"),
             ),
           ],
         ),

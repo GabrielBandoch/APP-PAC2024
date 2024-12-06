@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class location_s extends StatefulWidget {
+  const location_s({super.key});
+
   @override
   _Location_s createState() => _Location_s();
 }
@@ -39,7 +41,7 @@ class _Location_s extends State<location_s> {
           ),
           Expanded(
             child: ListView(
-              children: [
+              children: const [
                 StatusCard(
                   userName: 'Francisco Costa',
                   avatarUrl: 'https://example.com/avatar.jpg',

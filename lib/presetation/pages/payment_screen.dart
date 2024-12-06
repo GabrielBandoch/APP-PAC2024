@@ -267,7 +267,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text("Aluno Selecionado: $selectedStudent",
-                      style: TextStyle(fontSize: 16)),
+                      style: const TextStyle(fontSize: 16)),
                 ),
               TextField(
                 controller: _dateController,

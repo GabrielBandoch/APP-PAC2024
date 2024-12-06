@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SchedulePaymentPage extends StatefulWidget {
+  const SchedulePaymentPage({super.key});
+
   @override
   _SchedulePaymentPageState createState() => _SchedulePaymentPageState();
 }
@@ -91,8 +93,8 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                   print('Avatar clicado!');
                 },
               ),
-              SizedBox(height: 50),
-              Center(
+              const SizedBox(height: 50),
+              const Center(
                 child: Text(
                   "Pagamento pendente",
                   style: TextStyle(
@@ -102,8 +104,8 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
               "Responsável", 
               style: TextStyle(fontWeight: FontWeight.bold)
             ),
@@ -113,18 +115,18 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                 ),
-                child: Text(
+                child: const Text(
                   "FRANCISCO MARCELO CAETANO COSTA",
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Text(
+            const Text(
               "Aluno",
               style: TextStyle(fontWeight: FontWeight.bold)
             ),
@@ -134,18 +136,18 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                 ),
-                child: Text(
+                child: const Text(
                   "ERIC GABRIEL CAETANO",
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Text(
+            const Text(
               "Data de vencimento",
               style: TextStyle(fontWeight: FontWeight.bold)
             ),
@@ -155,21 +157,21 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                 ),
-                child: Text(
+                child: const Text(
                   "01/09/2024",
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-              SizedBox(height: 90),
+              const SizedBox(height: 90),
               Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Deseja mudar a data de pagamento?",
                       style: TextStyle(
                         color: Colors.blue,
@@ -187,7 +189,7 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                           builder: (BuildContext context, Widget? child) {
                             return Theme(
                               data: Theme.of(context).copyWith(
-                                colorScheme: ColorScheme.light(
+                                colorScheme: const ColorScheme.light(
                                   primary: Colors.blue,
                                   onPrimary: Colors.white,
                                   onSurface: Colors.black,
@@ -210,10 +212,10 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
-                        padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                        shape: StadiumBorder(),
+                        padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                        shape: const StadiumBorder(),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Abrir Calendário",
                         style: TextStyle(
                           fontSize: 16,
@@ -225,19 +227,19 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               if (selectedDate != null)
                 Center(
                   child: Text(
                     "Data selecionada: ${selectedDate!.toLocal()}".split(' ')[0],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
                 ),
-              Spacer(),
+              const Spacer(),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -245,10 +247,10 @@ class _SchedulePaymentPageState extends State<SchedulePaymentPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
-                    padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                    shape: StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                    shape: const StadiumBorder(),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Confirmar",
                     style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                   ),

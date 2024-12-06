@@ -165,7 +165,7 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                                           const BorderSide(color: Colors.blue),
                                     ),
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     'Editar',
                                     style: TextStyle(color: Colors.blue),
                                   ),
@@ -195,7 +195,7 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                     ),
                     backgroundColor: Colors.blue,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Criar Turma',
                     style: TextStyle(
                         fontSize: 20,

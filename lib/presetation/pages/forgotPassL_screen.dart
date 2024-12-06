@@ -16,7 +16,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Future<void> resetPassword(BuildContext context) async {
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('As senhas não correspondem.')),
+        const SnackBar(content: Text('As senhas não correspondem.')),
       );
       return;
     }
@@ -25,7 +25,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       String? oobCode = Uri.base.queryParameters['oobCode'];
       if (oobCode == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
               content: Text('Erro: código de redefinição não encontrado.')),
         );
         return;
@@ -37,12 +37,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Senha alterada com sucesso.')),
+        const SnackBar(content: Text('Senha alterada com sucesso.')),
       );
       Navigator.pushReplacementNamed(context, '/login');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao redefinir a senha. Tente novamente.')),
+        const SnackBar(content: Text('Erro ao redefinir a senha. Tente novamente.')),
       );
     }
   }
@@ -71,13 +71,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(hintText: 'Nova senha'),
+              decoration: const InputDecoration(hintText: 'Nova senha'),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: _confirmPasswordController,
               obscureText: true,
-              decoration: InputDecoration(hintText: 'Repita a senha'),
+              decoration: const InputDecoration(hintText: 'Repita a senha'),
             ),
             const SizedBox(height: 32),
             ElevatedButton(

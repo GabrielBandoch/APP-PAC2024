@@ -43,7 +43,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     userId = userProvider.user!.uid;
     userRole = userProvider.userRole ?? 'aluno';
 
-    // Buscar dados do aluno ou condutor
     if (userRole == 'aluno') {
       userData = await _firestoreServices.getAlunoData(userId) ?? {};
     } else {
@@ -76,7 +75,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _deleteAccount() async {
-    // Armazena o contexto principal (fora do diálogo)
     final mainContext = context;
 
     showDialog(

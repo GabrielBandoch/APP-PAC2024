@@ -40,7 +40,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
